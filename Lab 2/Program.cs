@@ -16,7 +16,7 @@ namespace Lab_2
     {
         static void Main(string[] args)
         {
-            Random random = new Random();
+            Random random = new();
             List<ServiceDesk> desks = GenerateUtility.GetRandomServiceDeskModelsList(10, random);
 
             string jsonString = JsonConvert.SerializeObject(desks.Select(x => ServiceDeskConverter.ConvertToDTO(x)).ToList());
@@ -28,7 +28,7 @@ namespace Lab_2
             foreach (var item in deserialisedDesks.Select(x => ServiceDeskConverter.ConvertToModel(x)))
             {
                 Console.WriteLine();
-                Console.WriteLine(item.ToString());
+                Console.WriteLine(item.ToShortString());
             }
         }
     }
