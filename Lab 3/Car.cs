@@ -16,10 +16,21 @@ namespace Lab_3_Part_1
             this.name = name;
         }
 
+        public Car(string name, bool washed)
+        {
+            this.name = name;
+            this.washed = washed;
+        }
+
         public void Wash()
         {
             Console.WriteLine(name + " is washed.");
             washed = true;
+        }
+
+        public override string ToString()
+        {
+            return "Name: " + name + ",\n" + "Is washed: " + washed.ToString();
         }
     }
 }

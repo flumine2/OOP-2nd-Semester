@@ -47,7 +47,10 @@ namespace Lab_3_Part_2
 
         private void SuperButton_MouseCaptureChanged(object sender, EventArgs e)
         {
-            action();
+            if (action != null)
+            {
+                action();
+            }
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)

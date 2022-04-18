@@ -21,6 +21,11 @@ namespace Lab_3_Part_1
             cars.Add(new Car(name));
         }
 
+        public void Add(string name, bool washed)
+        {
+            cars.Add(new Car(name,washed));
+        }
+
         public IEnumerator GetEnumerator()
         {
             for (int i = 0; i < cars.Count; i++)

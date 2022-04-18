@@ -44,9 +44,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Car.cs" />
+    <Compile Include="DivideTask\IntegerDivide.cs" />
     <Compile Include="Garage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SumOfAPTask\SumOfAPService.cs" />
+    <Compile Include="TimerTask\Timer.cs" />
     <Compile Include="Washer.cs" />
   </ItemGroup>
   <ItemGroup>
