@@ -13,7 +13,7 @@ namespace Lab_3_Part_1.SumOfAPTask
         public static double GetSumOfProgression(double startpoint, Operation operation, double accuracy)
         {
             double sum = 0;
-            for (int i = 0; sum % accuracy <= 0; i++)
+            for (int i = 0; Math.Abs(operation(startpoint, i)) >= accuracy; i++)
             {
                 sum += operation(startpoint, i);
             }
@@ -22,22 +22,22 @@ namespace Lab_3_Part_1.SumOfAPTask
 
         public static double DivideByTwo(double startpoint, int iteration)
         {
-            return startpoint / (2 ^ iteration);
+            return startpoint / Math.Pow(2, iteration);
         }
 
         public static double DivideByMinusTwo(double startpoint, int iteration)
         {
             if (iteration % 2 == 1)
             {
-                return startpoint / (2 ^ iteration);
+                return startpoint / Math.Pow(2, iteration);
             }
             else
             {
-                return startpoint / (-2 ^ iteration);
+                return startpoint / Math.Pow(-2, iteration);
             }
         }
 
-        public static double DivideBySamePLUS(double startpoint, int iteration)
+        public static double DivideByIterarionFactorial(double startpoint, int iteration)
         {
             return startpoint / Factorial(iteration + 1);
         }

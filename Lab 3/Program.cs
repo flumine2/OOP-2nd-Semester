@@ -14,12 +14,14 @@ namespace Lab_3_Part_1
     //SharpWasher
     class Program
     {
+        private const string Format = "{0:0.##}";
+
         static void Main(string[] args)
         {
             //SharpWasherTask();
-            TimerTask();
+            //TimerTask();
             //IntegerDivideTask();
-            //SumPfAPTask();
+            SumPfAPTask();
         }
 
         public static void SharpWasherTask()
@@ -49,6 +51,7 @@ namespace Lab_3_Part_1
             int countdown = int.Parse(Console.ReadLine());
             Console.WriteLine("Enter the message:");
             string message = Console.ReadLine();
+
             Timer.Start(countdown, Console.WriteLine, message);
         }
 
@@ -56,12 +59,10 @@ namespace Lab_3_Part_1
         {
             Console.WriteLine("Input int array:");
             int[] array = Console.ReadLine().Split().Select(x => int.Parse(x)).ToArray();
-            IsIntDivideByDelegate deleg3 = IntegerDivide.IsDivisibleBy3;
-            IsIntDivideByDelegate deleg7 = IntegerDivide.IsDivisibleBy7;
 
             foreach (int item in array)
             {
-                if (IntegerDivide.IsDivisible(item, deleg3, deleg7))
+                if (IntegerDivide.IsDivisible(item, IntegerDivide.IsDivisibleBy3, IntegerDivide.IsDivisibleBy7))
                 {
                     Console.WriteLine($"{item} divided as an integer by the numbers 3 and 7.");
                 }
@@ -76,9 +77,9 @@ namespace Lab_3_Part_1
             Console.WriteLine("Input startpoint:");
             double startpoint = double.Parse(Console.ReadLine());
 
-            Console.WriteLine(SumOfAPService.GetSumOfProgression(startpoint, SumOfAPService.DivideByTwo, accuracy));
-            Console.WriteLine(SumOfAPService.GetSumOfProgression(startpoint, SumOfAPService.DivideByMinusTwo, accuracy));
-            Console.WriteLine(SumOfAPService.GetSumOfProgression(startpoint, SumOfAPService.DivideBySamePLUS, accuracy));
+            Console.WriteLine(string.Format(Format, SumOfAPService.GetSumOfProgression(startpoint, SumOfAPService.DivideByTwo, accuracy)));
+            Console.WriteLine(string.Format(Format, SumOfAPService.GetSumOfProgression(startpoint, SumOfAPService.DivideByMinusTwo, accuracy)));
+            Console.WriteLine(string.Format(Format, SumOfAPService.GetSumOfProgression(startpoint, SumOfAPService.DivideByIterarionFactorial, accuracy)));
         }
     }
 }
