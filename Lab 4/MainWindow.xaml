@@ -27,7 +27,7 @@
 
             <Image x:Name="GameField_Image" Grid.Row="0"/>
             <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal">
-                <Button x:Name="Start_Button" Content="Start" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="55" Width="150" Margin="5 5 5 10"/>
+                <Button x:Name="Start_Button" Content="Start" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="55" Width="150" Margin="5 5 5 10" Click="Start_Button_Click"/>
                 <Button x:Name="NextJockey_Button" Content=">" FontSize="46" VerticalAlignment="Bottom" Height="55" Width="55" Margin="15 5 5 10"/>
             </StackPanel>
             

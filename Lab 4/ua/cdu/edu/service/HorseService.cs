@@ -34,7 +34,7 @@ namespace Lab_4.Logic.Services
             TIMER.Start();
             foreach (var horse in Horses)
             {
-                horse.ChangeAcceleration();
+                horse.ChangeState();
             }
         }
     }

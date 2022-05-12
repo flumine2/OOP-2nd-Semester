@@ -23,31 +23,14 @@ namespace Lab_4.ua.cdu.edu.util
             return RANDOM.NextDouble() * (max - min) + min;
         }
 
-        public static List<Horse> randomHorses(int count)
-        {
-            return Enumerable.Range(0, count)
-                .Select(i => nextHorse())
-                .ToList();
-        }
-
-        private static Horse nextHorse()
-        {
-            return new Horse
-                (
-                    name: nextString(7),
-                    speed: RandomUtil.nextInt(5, 11),
-                    color: nextColor()
-                ) ;
-        }
-
-        private static Color nextColor() 
-        {
-            return Color.FromRgb(nextByte(), nextByte(), nextByte());
-        }
-
         private static byte nextByte()
         {
             return (byte)nextInt(0, 255);
+        }
+
+        private static char nextChar()
+        {
+            return (char)nextInt(65, 90);
         }
 
         private static string nextString(int length)
@@ -57,9 +40,27 @@ namespace Lab_4.ua.cdu.edu.util
                 .ToArray());
         }
 
-        private static char nextChar() 
+        private static Color nextColor()
         {
-            return (char)nextInt(65, 90);
+            return Color.FromRgb(nextByte(), nextByte(), nextByte());
+        }
+
+        public static List<Horse> randomHorses(int count)
+        {
+            return Enumerable.Range(0, count)
+                .Select((x, index) => nextHorse(index + 1))
+                .ToList();
+        }
+
+        private static Horse nextHorse(int startpos)
+        {
+            return new Horse
+                (
+                    name: nextString(7),
+                    speed: nextInt(5, 11),
+                    color: nextColor(),
+                    startpos: startpos
+                );
         }
     }
 }

@@ -24,12 +24,12 @@ namespace Lab_4.Logic.Services
         private HorseService horseService;
         private Background[] backgrounds;
 
-        public RenderService(Image image, Size size)
+        public RenderService(Image image, HorseService horseService, Size size)
         {
-            this.cameraPosition = (int) image.Width / 2;
+            this.cameraPosition = (int) image.ActualWidth / 2;
             this.image = image;
             this.size = size;
-            this.horseService = new();
+            this.horseService = horseService;
             this.backgrounds = GenerateBackgrounds();
         }
 

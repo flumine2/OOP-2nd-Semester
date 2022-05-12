@@ -25,12 +25,20 @@ namespace Lab_4
     public partial class MainWindow : Window
     {
         private readonly RenderService renderer;
+        private readonly HorseService horseService;
 
         public MainWindow()
         {
             InitializeComponent();
-            this.renderer = new RenderService(GameField_Image, new Size(1920, 1980));
+            horseService = new HorseService();
+            this.renderer = new RenderService(GameField_Image, horseService , new Size(4532, 1980));
             this.renderer.RenderFrame();
+        }
+
+        private void Start_Button_Click(object sender, RoutedEventArgs e)
+        {
+            horseService.GetNextFrameData();
+            renderer.RenderFrame();
         }
     }
 }
