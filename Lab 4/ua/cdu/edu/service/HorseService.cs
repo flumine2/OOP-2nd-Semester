@@ -1,4 +1,6 @@
 ﻿using Lab_4.Logic.Model;
+using Lab_4.ua.cdu.edu.util;
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Lab_4.Logic.Services
 {
-    class HorsesService
+    public class HorseService
     {
         public static Stopwatch TIMER = new();
         private List<Horse> horses;
@@ -22,20 +24,18 @@ namespace Lab_4.Logic.Services
             }
         }
 
-        public HorsesService()
+        public HorseService()
         {
-            Horses = GenerateRandomRidersService.GenerateRandomRiders(5);
+            this.horses = RandomUtil.randomHorses(5);
         }
 
-        public async void GetNextFrameData()
+        public void GetNextFrameData()
         {
-            List<Task> tasks = new();
             TIMER.Start();
             foreach (var horse in Horses)
             {
-                tasks.Add(horse.ChangeAcceleration());
+                horse.ChangeAcceleration();
             }
-            await Task.WhenAll(tasks);
         }
     }
 }

@@ -59,6 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ua\cdu\edu\util\RandomUtil.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -67,13 +68,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Logic\Model\Background.cs" />
-    <Compile Include="Logic\Model\Horse.cs" />
-    <Compile Include="Logic\Services\GenerateRandomRidersService.cs" />
-    <Compile Include="Logic\Services\HorsesService.cs" />
-    <Compile Include="Logic\Services\IRender.cs" />
-    <Compile Include="Logic\Services\RenderService.cs" />
-    <Compile Include="Logic\Services\SizeDelegate.cs" />
+    <Compile Include="ua\cdu\edu\model\Background.cs" />
+    <Compile Include="ua\cdu\edu\model\Horse.cs" />
+    <Compile Include="ua\cdu\edu\service\HorseService.cs" />
+    <Compile Include="ua\cdu\edu\service\IRender.cs" />
+    <Compile Include="ua\cdu\edu\service\RenderService.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
