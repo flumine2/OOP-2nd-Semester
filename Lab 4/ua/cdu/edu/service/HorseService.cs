@@ -30,9 +30,19 @@ namespace Lab_4.ua.cdu.edu.service
             this.horses = RandomUtil.randomHorses(5);
         }
 
-        public void UpdateState()
+        public bool UpdateState()
         {
-            horses.ForEach(horse => horse.UpdateState());
+            bool raceOver = true;
+            foreach (Horse horse in horses) 
+            {
+                if (!horse.Finished) 
+                {
+                    raceOver = false;
+                    horse.UpdateState();
+                }
+            }
+
+            return raceOver;
         }
     }
 }

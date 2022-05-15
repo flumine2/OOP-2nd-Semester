@@ -57,7 +57,7 @@ namespace Lab_4.ua.cdu.edu.util
             return new Horse
                 (
                     name: nextString(7),
-                    speed: nextInt(5, 11),
+                    speed: nextInt(Config.MIN_SPEED, Config.MAX_SPEED),
                     color: nextColor(),
                     startPosition: startPosition
                 );

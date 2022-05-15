@@ -19,20 +19,20 @@ namespace Lab_4.ua.cdu.edu.view
 
         public HorseView(DrawingContext drawingContext) : base(drawingContext)
         {
-            this.animationService = new HorseAnimationService();
+            this.animationService = HorseAnimationService.Instance;
         }
 
-        protected override void Render(int cameraPosition, Horse horse)
+        protected override void Render(double cameraPosition, Horse horse)
         {
             List<ImageSource> animation = animationService.animate(horse);
             drawingContext.DrawImage(
-                animation[0],
+                animation[horse.State],
                 new Rect
                 (
                     horse.Position.X - cameraPosition,
                     horse.Position.Y,
-                    animation[0].Width,
-                    animation[0].Height
+                    Config.HorseSize.Width,
+                    Config.HorseSize.Height
                 )
             );
         }

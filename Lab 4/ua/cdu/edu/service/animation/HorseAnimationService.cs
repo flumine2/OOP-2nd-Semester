@@ -15,12 +15,17 @@ namespace Lab_4.ua.cdu.edu.service.animation
 {
     public class HorseAnimationService : AnimationService<Horse>
     {
+        public static HorseAnimationService Instance { get; } = new();
         private Dictionary<Color, List<ImageSource>> animationCache = new Dictionary<Color, List<ImageSource>>();
 
         static HorseAnimationService() 
         {
             Directory.SetCurrentDirectory("..");
             Directory.SetCurrentDirectory("..");
+        }
+
+        private HorseAnimationService()
+        {
         }
 
         public List<ImageSource> animate(Horse item)
@@ -30,7 +35,9 @@ namespace Lab_4.ua.cdu.edu.service.animation
                 return animationCache[item.Color];
             }
 
-            return GetHorseAnimation(item.Color);
+            animationCache[item.Color] = GetHorseAnimation(item.Color);
+
+            return animationCache[item.Color];
         }
 
         public List<ImageSource> GetHorseAnimation(Color color)

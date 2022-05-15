@@ -15,13 +15,14 @@ namespace Lab_4.ua.cdu.edu.model
 {
     public class Horse
     {
-        private static readonly int HORSE_HEIGHT = 180;
-
         public string Name { get; private set; }
         public Color Color { get; private set; }
         public TimeSpan Time { get; private set; }
+        public int State { get; private set; }
 
         public Point Position { get; private set; }
+        public bool Finished { get; private set; }
+
         private double speed;
 
         public Horse(string name, Color color, double speed, int startPosition)
@@ -29,19 +30,29 @@ namespace Lab_4.ua.cdu.edu.model
             this.Name = name;
             this.Color = color;
             this.speed = speed;
-            this.Position = new Point(1600, 440 + (startPosition - 1) * HORSE_HEIGHT);
+            this.Position = GetInitialPosition(startPosition);
+        }
+
+        private Point GetInitialPosition(int startPosition) 
+        {
+            return new Point(1600, 160 + (startPosition - 1) * Config.HorseSize.Height / 2);
         }
 
         public void UpdateState()
         {
             Time = HorseService.TIMER.Elapsed;
+            if (Position.X > Config.TRACK_LENGTH) 
+            {
+                Finished = true;
+            }
+            State = (State + 1) % Config.STATES_COUNT;
             ChangeSpeed();
-            Position = new Point(Position.X + speed, Position.Y);
+            Position = new Point(Position.X + ChangeSpeed(), Position.Y);
         }
 
-        private void ChangeSpeed()
+        private double ChangeSpeed()
         {
-            this.speed = speed * RandomUtil.nextDouble(0.7, 1.3);
+            return speed * RandomUtil.nextDouble(0.7, 1.3);
         }
     }
 }

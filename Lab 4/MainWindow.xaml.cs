@@ -1,4 +1,5 @@
-﻿using Lab_4.ua.cdu.edu.service;
+﻿using Lab_4.ua.cdu.edu;
+using Lab_4.ua.cdu.edu.service;
 
 using System;
 using System.Collections.Generic;
@@ -23,21 +24,18 @@ namespace Lab_4
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly RenderService renderer;
-        private readonly HorseService horseService;
+        private readonly FrontPresenter frontPresenter;
 
         public MainWindow()
         {
             InitializeComponent();
-            this.horseService = new HorseService();
-            this.renderer = new RenderService(GameField_Image, new Size(4532, 1980), horseService.Horses);
-            renderer.RenderFrame();
+            HorseService horseService = new HorseService();
+            this.frontPresenter = new FrontPresenter(new RenderService(GameField_Image, () => new Size(Image_Column.ActualWidth, Image_Row.ActualHeight), horseService.Horses), horseService);
         }
 
         private void Start_Button_Click(object sender, RoutedEventArgs e)
         {
-            horseService.UpdateState();
-            renderer.RenderFrame();
+            frontPresenter.StartRace();
         }
     }
 }

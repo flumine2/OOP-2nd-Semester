@@ -19,9 +19,16 @@ namespace Lab_4.ua.cdu.edu.view
         {
         }
 
-        protected override void Render(int cameraPosition, Background background)
+        protected override void Render(double cameraPosition, Background background)
         {
-            drawingContext.DrawImage(bitmap, new Rect(background.Position - cameraPosition, 0, 1920, 1980));
+            drawingContext.DrawImage(bitmap, 
+                new Rect
+                (
+                    background.Position - cameraPosition, 
+                    0,
+                    Config.BackgroundSize.Width, 
+                    Config.BackgroundSize.Height)
+                );
         }
     }
 }

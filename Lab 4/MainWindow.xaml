@@ -10,7 +10,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Name="Image_Column"/>
         </Grid.ColumnDefinitions>
 
         <StackPanel>
@@ -21,7 +21,7 @@
 
         <Grid Grid.Column="1" x:Name="GameField_Grid">
             <Grid.RowDefinitions>
-                <RowDefinition Height="450"/>
+                <RowDefinition Name="Image_Row" Height="450"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 

@@ -10,37 +10,33 @@ using System.Windows;
 using Lab_4.ua.cdu.edu.model;
 using Lab_4.ua.cdu.edu.view;
 using Lab_4.ua.cdu.edu.service.animation;
+using System.Windows.Threading;
 
 namespace Lab_4.ua.cdu.edu.service
 {
+    public delegate Size ImageSize();
     public class RenderService
     {
-        private static readonly double END_OF_THE_RACE = 38400;
-        private static readonly int FPS = 30;
-        private static readonly double PIXELS_PER_DIP = 96;
-        
-        private static readonly Size BackgroundSize = new Size(1920, 1980);
-
-        private int cameraPosition;
+        private Horse targetHorse;
         private Image image;
-        private Size size;
+        private ImageSize imageSize;
 
         private List<Background> backgrounds;
         private List<Horse> horses;
 
-        public RenderService(Image image, Size size, List<Horse> horses)
+        public RenderService(Image image, ImageSize imageSize, List<Horse> horses)
         {
-            this.cameraPosition = (int)image.ActualWidth / 2;
+            this.targetHorse = horses[0];
             this.image = image;
-            this.size = size;
+            this.imageSize = imageSize;
             this.backgrounds = GenerateBackgrounds();
             this.horses = horses;
         }
 
         private List<Background> GenerateBackgrounds()
         { 
-            Background[] backgrounds = new Background[(int)Math.Ceiling(END_OF_THE_RACE / BackgroundSize.Width)];
-            return backgrounds.Select((x, index) => new Background((int)BackgroundSize.Width * index)).ToList();
+            Background[] backgrounds = new Background[(int)Math.Ceiling(Config.TRACK_LENGTH / Config.BackgroundSize.Width) + 2];
+            return backgrounds.Select((x, index) => new Background((int)Config.BackgroundSize.Width * index)).ToList();
         }
 
         public void RenderFrame() => image.Source = GetFrame();
@@ -48,10 +44,10 @@ namespace Lab_4.ua.cdu.edu.service
         private BitmapSource GetFrame()
         {
             RenderTargetBitmap bitmap = new RenderTargetBitmap(
-                Convert.ToInt32(size.Width),
-                Convert.ToInt32(size.Height),
-                PIXELS_PER_DIP,
-                PIXELS_PER_DIP,
+                Convert.ToInt32(Math.Max(imageSize().Width, 1)),
+                Convert.ToInt32(Math.Max(imageSize().Height, 1)),
+                Config.PIXELS_PER_DIP,
+                Config.PIXELS_PER_DIP,
                 PixelFormats.Pbgra32);
 
             DrawingVisual drawingVisual = new();
@@ -68,6 +64,7 @@ namespace Lab_4.ua.cdu.edu.service
 
         private void Render(DrawingContext drawingContext)
         {
+            double cameraPosition = targetHorse.Position.X + 2 * Config.HorseSize.Width / 3 - imageSize().Width / 2;
             BackgroundView backgroundView = new BackgroundView(drawingContext);
             backgroundView.Render(cameraPosition, backgrounds);
             HorseView horseView = new HorseView(drawingContext);
