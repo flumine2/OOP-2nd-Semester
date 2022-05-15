@@ -7,41 +7,45 @@ using System.Windows.Media;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows;
-using Lab_4.Logic.Model;
+using Lab_4.ua.cdu.edu.model;
+using Lab_4.ua.cdu.edu.view;
+using Lab_4.ua.cdu.edu.service.animation;
 
-namespace Lab_4.Logic.Services
+namespace Lab_4.ua.cdu.edu.service
 {
     public class RenderService
     {
         private static readonly double END_OF_THE_RACE = 38400;
         private static readonly int FPS = 30;
         private static readonly double PIXELS_PER_DIP = 96;
+        
         private static readonly Size BackgroundSize = new Size(1920, 1980);
 
         private int cameraPosition;
         private Image image;
-        private Size size { get; }
-        private HorseService horseService;
-        private Background[] backgrounds;
+        private Size size;
 
-        public RenderService(Image image, HorseService horseService, Size size)
+        private List<Background> backgrounds;
+        private List<Horse> horses;
+
+        public RenderService(Image image, Size size, List<Horse> horses)
         {
-            this.cameraPosition = (int) image.ActualWidth / 2;
+            this.cameraPosition = (int)image.ActualWidth / 2;
             this.image = image;
             this.size = size;
-            this.horseService = horseService;
             this.backgrounds = GenerateBackgrounds();
+            this.horses = horses;
         }
 
-        private Background[] GenerateBackgrounds()
+        private List<Background> GenerateBackgrounds()
         { 
             Background[] backgrounds = new Background[(int)Math.Ceiling(END_OF_THE_RACE / BackgroundSize.Width)];
-            return backgrounds.Select((x, index) => new Background((int)BackgroundSize.Width * index)).ToArray();
+            return backgrounds.Select((x, index) => new Background((int)BackgroundSize.Width * index)).ToList();
         }
 
-        public void RenderFrame() => image.Source = GetRender();
+        public void RenderFrame() => image.Source = GetFrame();
 
-        private BitmapSource GetRender()
+        private BitmapSource GetFrame()
         {
             RenderTargetBitmap bitmap = new RenderTargetBitmap(
                 Convert.ToInt32(size.Width),
@@ -64,14 +68,10 @@ namespace Lab_4.Logic.Services
 
         private void Render(DrawingContext drawingContext)
         {
-            for (int i = 0; i < backgrounds.Length; i++)
-            {
-                backgrounds[i].Render(drawingContext, cameraPosition);
-            }
-            for (int i = 0; i < horseService.Horses.Count; i++)
-            {
-                horseService.Horses[i].Render(drawingContext, cameraPosition);
-            }
+            BackgroundView backgroundView = new BackgroundView(drawingContext);
+            backgroundView.Render(cameraPosition, backgrounds);
+            HorseView horseView = new HorseView(drawingContext);
+            horseView.Render(cameraPosition, horses);
         }
     }
 }

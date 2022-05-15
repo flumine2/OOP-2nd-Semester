@@ -59,6 +59,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ua\cdu\edu\model\Background.cs" />
+    <Compile Include="ua\cdu\edu\service\animation\AnimationService.cs" />
+    <Compile Include="ua\cdu\edu\service\animation\HorseAnimationService.cs" />
+    <Compile Include="ua\cdu\edu\view\BackgroundView.cs" />
+    <Compile Include="ua\cdu\edu\view\HorseView.cs" />
     <Compile Include="ua\cdu\edu\util\RandomUtil.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -68,10 +73,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ua\cdu\edu\model\Background.cs" />
     <Compile Include="ua\cdu\edu\model\Horse.cs" />
     <Compile Include="ua\cdu\edu\service\HorseService.cs" />
-    <Compile Include="ua\cdu\edu\service\IRender.cs" />
+    <Compile Include="ua\cdu\edu\view\View.cs" />
     <Compile Include="ua\cdu\edu\service\RenderService.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

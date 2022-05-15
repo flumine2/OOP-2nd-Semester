@@ -1,5 +1,4 @@
-﻿using Lab_4.Logic.Model;
-using Lab_4.Logic.Services;
+﻿using Lab_4.ua.cdu.edu.service;
 
 using System;
 using System.Collections.Generic;
@@ -30,14 +29,14 @@ namespace Lab_4
         public MainWindow()
         {
             InitializeComponent();
-            horseService = new HorseService();
-            this.renderer = new RenderService(GameField_Image, horseService , new Size(4532, 1980));
-            this.renderer.RenderFrame();
+            this.horseService = new HorseService();
+            this.renderer = new RenderService(GameField_Image, new Size(4532, 1980), horseService.Horses);
+            renderer.RenderFrame();
         }
 
         private void Start_Button_Click(object sender, RoutedEventArgs e)
         {
-            horseService.GetNextFrameData();
+            horseService.UpdateState();
             renderer.RenderFrame();
         }
     }

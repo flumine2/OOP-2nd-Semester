@@ -1,4 +1,4 @@
-﻿using Lab_4.Logic.Model;
+﻿using Lab_4.ua.cdu.edu.model;
 using Lab_4.ua.cdu.edu.util;
 
 using System;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab_4.Logic.Services
+namespace Lab_4.ua.cdu.edu.service
 {
     public class HorseService
     {
@@ -18,7 +18,7 @@ namespace Lab_4.Logic.Services
         public List<Horse> Horses
         {
             get => horses;
-            private set 
+            private set
             {
                 horses = value;
             }
@@ -26,16 +26,13 @@ namespace Lab_4.Logic.Services
 
         public HorseService()
         {
+            TIMER.Start();
             this.horses = RandomUtil.randomHorses(5);
         }
 
-        public void GetNextFrameData()
+        public void UpdateState()
         {
-            TIMER.Start();
-            foreach (var horse in Horses)
-            {
-                horse.ChangeState();
-            }
+            horses.ForEach(horse => horse.UpdateState());
         }
     }
 }

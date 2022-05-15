@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
-namespace Lab_4.Logic.Services
+namespace Lab_4.ua.cdu.edu.service.animation
 {
-    interface IRender
+    public interface AnimationService<T>
     {
-        void Render(DrawingContext drawingContext, int cameraPosition);
+        List<ImageSource> animate(T item);
     }
 }

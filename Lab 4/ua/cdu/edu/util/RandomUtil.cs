@@ -1,4 +1,4 @@
-﻿using Lab_4.Logic.Model;
+﻿using Lab_4.ua.cdu.edu.model;
 
 using System;
 using System.Collections.Generic;
@@ -52,14 +52,14 @@ namespace Lab_4.ua.cdu.edu.util
                 .ToList();
         }
 
-        private static Horse nextHorse(int startpos)
+        private static Horse nextHorse(int startPosition)
         {
             return new Horse
                 (
                     name: nextString(7),
                     speed: nextInt(5, 11),
                     color: nextColor(),
-                    startpos: startpos
+                    startPosition: startPosition
                 );
         }
     }
