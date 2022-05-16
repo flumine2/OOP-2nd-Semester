@@ -16,11 +16,11 @@ namespace Lab_4.ua.cdu.edu.view
             this.drawingContext = drawingContext;
         }
 
-        protected abstract void Render(double cameraPosition, T item);
+        protected abstract void Render(T item);
 
-        public void Render(double cameraPosition, List<T> items) 
+        public void Render(List<T> items) 
         {
-            items.ForEach(item => Render(cameraPosition, item));
+            items.ForEach(item => Render(item));
         }
     }
 }

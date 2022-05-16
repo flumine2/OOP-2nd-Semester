@@ -73,10 +73,10 @@ namespace Lab_4.ua.cdu.edu.service
         private void Render(DrawingContext drawingContext)
         {
             double cameraPosition = horses[TargetHorse].Position.X + 2 * Config.HorseSize.Width / 3 - imageSize().Width / 2;
-            BackgroundView backgroundView = new BackgroundView(drawingContext);
-            backgroundView.Render(cameraPosition, backgrounds);
-            HorseView horseView = new HorseView(drawingContext);
-            horseView.Render(cameraPosition, horses);
+            BackgroundView backgroundView = new BackgroundView(drawingContext, cameraPosition);
+            backgroundView.Render(backgrounds);
+            HorseView horseView = new HorseView(drawingContext, cameraPosition);
+            horseView.Render(horses);
         }
     }
 }

@@ -17,20 +17,22 @@ namespace Lab_4.ua.cdu.edu.model
     {
         public string Name { get; private set; }
         public Color Color { get; private set; }
-        public TimeSpan Time { get; private set; }
         public int State { get; private set; }
 
-        public Point Position { get; set; }
-        public bool Finished { get; set; }
+        public TimeSpan Time { get; private set; }
 
-        private double speed;
+        public Point Position { get; set; }
+        public double Speed;
+
+        public double Coefficient { get; set; }
+        public bool Finished { get; set; }
 
         public Horse(string name, Color color, double speed, int startPosition)
         {
-            this.Name = name;
-            this.Color = color;
-            this.speed = speed;
-            this.Position = GetInitialPosition(startPosition);
+            Name = name;
+            Color = color;
+            Speed = speed;
+            Position = GetInitialPosition(startPosition);
         }
 
         private Point GetInitialPosition(int startPosition) 
@@ -55,11 +57,17 @@ namespace Lab_4.ua.cdu.edu.model
 
         private double ChangeSpeed()
         {
-            return speed * RandomUtil.nextDouble(0.7, 1.3);
+            return Speed * RandomUtil.nextDouble(0.7, 1.3);
         }
 
         public int CompareTo(Horse other)
         {
+            int diff = Time.CompareTo(other.Time);
+            if (diff != 0) 
+            {
+                return diff;
+            }
+
             return Position.X.CompareTo(other.Position.X);
         }
     }

@@ -14,12 +14,14 @@ namespace Lab_4.ua.cdu.edu.view
     public class BackgroundView : View<Background>
     {
         private static readonly BitmapImage bitmap = new(new Uri("pack://application:,,,/Resources/Background/Track.png"));
-
-        public BackgroundView(DrawingContext drawingContext) : base(drawingContext)
+        private double cameraPosition;
+        
+        public BackgroundView(DrawingContext drawingContext, double cameraPosition) : base(drawingContext)
         {
+            this.cameraPosition = cameraPosition;
         }
 
-        protected override void Render(double cameraPosition, Background background)
+        protected override void Render(Background background)
         {
             drawingContext.DrawImage(bitmap, 
                 new Rect

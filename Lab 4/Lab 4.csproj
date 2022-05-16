@@ -60,12 +60,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ua\cdu\edu\Config.cs" />
+    <Compile Include="ua\cdu\edu\exception\TransactionException.cs" />
     <Compile Include="ua\cdu\edu\presenter\FrontPresenter.cs" />
     <Compile Include="ua\cdu\edu\model\Background.cs" />
     <Compile Include="ua\cdu\edu\service\animation\AnimationService.cs" />
     <Compile Include="ua\cdu\edu\service\animation\HorseAnimationService.cs" />
+    <Compile Include="ua\cdu\edu\service\BetService.cs" />
     <Compile Include="ua\cdu\edu\service\SchedulerExecutor.cs" />
     <Compile Include="ua\cdu\edu\view\BackgroundView.cs" />
+    <Compile Include="ua\cdu\edu\view\BalanceView.cs" />
     <Compile Include="ua\cdu\edu\view\HorseView.cs" />
     <Compile Include="ua\cdu\edu\util\RandomUtil.cs" />
     <Page Include="MainWindow.xaml">
