@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 
 namespace Lab_4.ua.cdu.edu.view
 {
-    public class BackgroundView : View<Background>
+    public class BackgroundView : FrontView<Background>
     {
         private static readonly BitmapImage bitmap = new(new Uri("pack://application:,,,/Resources/Background/Track.png"));
         private double cameraPosition;

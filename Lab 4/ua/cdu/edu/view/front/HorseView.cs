@@ -12,7 +12,7 @@ using System.Windows.Media;
 
 namespace Lab_4.ua.cdu.edu.view
 {
-    public class HorseView : View<Horse>
+    public class HorseView : FrontView<Horse>
     {
         private AnimationService<Horse> animationService;
         private double cameraPosition;

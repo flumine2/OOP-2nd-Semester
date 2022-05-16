@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Lab_4.ua.cdu.edu.model;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,13 +9,14 @@ using System.Windows.Media;
 
 namespace Lab_4.ua.cdu.edu.view
 {
-    public class BalanceView : View<int>
+    public class BalanceView : View<Bet, int>
     {
-        public BalanceView(DrawingContext drawingContext) : base(drawingContext)
+        public Bet Bind()
         {
+            throw new NotImplementedException();
         }
 
-        protected override void Render(int item)
+        public void Render(int item)
         {
             throw new NotImplementedException();
         }
