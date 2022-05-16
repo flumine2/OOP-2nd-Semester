@@ -42,6 +42,10 @@ namespace Lab_4.ua.cdu.edu.service
                     horse.UpdateState();
                 }
             }
+            if (raceOver) 
+            {
+                TIMER.Stop();
+            }
             horses.Sort();
 
             return raceOver;
