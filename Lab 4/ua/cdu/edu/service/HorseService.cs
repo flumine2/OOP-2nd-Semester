@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Lab_4.ua.cdu.edu.service
 {
@@ -27,7 +28,7 @@ namespace Lab_4.ua.cdu.edu.service
         public HorseService()
         {
             TIMER.Start();
-            this.horses = RandomUtil.randomHorses(5);
+            this.horses = RandomUtil.randomHorses(Config.HORSES_COUNT);
         }
 
         public bool UpdateState()
@@ -41,8 +42,29 @@ namespace Lab_4.ua.cdu.edu.service
                     horse.UpdateState();
                 }
             }
+            horses.Sort();
 
             return raceOver;
+        }
+
+        public int NextHorse(int current) 
+        {
+            return (current + 1) % horses.Count;
+        }
+
+        public int PreviousHorse(int current)
+        {
+            int previous = current - 1;
+            return previous < 0 ? horses.Count - 1 : previous % horses.Count;
+        }
+
+        public void Reset() 
+        {
+            for (int i = 0; i < horses.Count; i++) 
+            {
+                horses[i].Finished = false;
+                horses[i].Position = new Point(0, horses[i].Position.Y);
+            }
         }
     }
 }

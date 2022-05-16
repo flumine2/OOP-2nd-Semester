@@ -35,7 +35,7 @@ namespace Lab_4.ua.cdu.edu.service.animation
                 return animationCache[item.Color];
             }
 
-            animationCache[item.Color] = GetHorseAnimation(item.Color);
+            animationCache.Add(item.Color, GetHorseAnimation(item.Color));
 
             return animationCache[item.Color];
         }

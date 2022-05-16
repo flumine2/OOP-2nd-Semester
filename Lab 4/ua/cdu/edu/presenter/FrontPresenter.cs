@@ -12,7 +12,8 @@ namespace Lab_4.ua.cdu.edu
     public class FrontPresenter
     {
         private static readonly int SECOND = 1000;
-        private static readonly int FPS = 50;
+
+        private bool raceInProgress;
 
         private readonly RenderService renderer;
         private readonly HorseService horseService;
@@ -24,9 +25,14 @@ namespace Lab_4.ua.cdu.edu
             renderer.RenderFrame();
         }
 
-        public void StartRace() 
+        public async void StartRace() 
         {
-            SchedulerExecutor.schedule(NextStage, SECOND / FPS);
+            if (!raceInProgress) 
+            {
+                raceInProgress = true;
+                await SchedulerExecutor.schedule(NextStage, SECOND / Config.FPS);
+                raceInProgress = false;
+            }
         }
 
         private bool NextStage() 
@@ -35,6 +41,25 @@ namespace Lab_4.ua.cdu.edu
             renderer.RenderFrame();
 
             return raceOver;
+        }
+
+        public void ResetRace()
+        {
+            if (!raceInProgress) 
+            {
+                horseService.Reset();
+                renderer.RenderFrame();
+            }
+        }
+
+        public void NextHorse() 
+        {
+            renderer.TargetHorse = horseService.NextHorse(renderer.TargetHorse);
+        }
+
+        public void PreviousHorse() 
+        {
+            renderer.TargetHorse = horseService.PreviousHorse(renderer.TargetHorse);
         }
     }
 }

@@ -37,5 +37,20 @@ namespace Lab_4
         {
             frontPresenter.StartRace();
         }
+
+        private void NextHorse_Button_Click(object sender, RoutedEventArgs e)
+        {
+            frontPresenter.NextHorse();
+        }
+
+        private void PreviousHorse_Button_Click(object sender, RoutedEventArgs e) 
+        {
+            frontPresenter.PreviousHorse();
+        }
+
+        private void Reset_Button_Click(object sender, RoutedEventArgs e)
+        {
+            frontPresenter.ResetRace();
+        }
     }
 }

@@ -13,15 +13,15 @@ using System.Windows.Media.Imaging;
 
 namespace Lab_4.ua.cdu.edu.model
 {
-    public class Horse
+    public class Horse : IComparable<Horse>
     {
         public string Name { get; private set; }
         public Color Color { get; private set; }
         public TimeSpan Time { get; private set; }
         public int State { get; private set; }
 
-        public Point Position { get; private set; }
-        public bool Finished { get; private set; }
+        public Point Position { get; set; }
+        public bool Finished { get; set; }
 
         private double speed;
 
@@ -35,24 +35,32 @@ namespace Lab_4.ua.cdu.edu.model
 
         private Point GetInitialPosition(int startPosition) 
         {
-            return new Point(1600, 160 + (startPosition - 1) * Config.HorseSize.Height / 2);
+            return new Point(0, 160 + (startPosition - 1) * Config.HorseSize.Height / 2);
         }
 
         public void UpdateState()
         {
             Time = HorseService.TIMER.Elapsed;
-            if (Position.X > Config.TRACK_LENGTH) 
+            if (Position.X > Config.TRACK_LENGTH)
             {
                 Finished = true;
+                State = 0;
             }
-            State = (State + 1) % Config.STATES_COUNT;
-            ChangeSpeed();
+            else
+            {
+                State = (State + 1) % Config.STATES_COUNT;
+            }
             Position = new Point(Position.X + ChangeSpeed(), Position.Y);
         }
 
         private double ChangeSpeed()
         {
             return speed * RandomUtil.nextDouble(0.7, 1.3);
+        }
+
+        public int CompareTo(Horse other)
+        {
+            return Position.X.CompareTo(other.Position.X);
         }
     }
 }

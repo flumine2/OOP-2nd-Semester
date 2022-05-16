@@ -12,6 +12,10 @@ namespace Lab_4.ua.cdu.edu.util
     public static class RandomUtil
     {
         private static Random RANDOM = new Random();
+        private static readonly string[] NAMES = 
+        {
+            "Lola", "Maks", "Jane", "Apple", "Mila", "John", "Victor"
+        };
 
         public static int nextInt(int min, int max) 
         {
@@ -26,18 +30,6 @@ namespace Lab_4.ua.cdu.edu.util
         private static byte nextByte()
         {
             return (byte)nextInt(0, 255);
-        }
-
-        private static char nextChar()
-        {
-            return (char)nextInt(65, 90);
-        }
-
-        private static string nextString(int length)
-        {
-            return new string(Enumerable.Range(0, length)
-                .Select(i => nextChar())
-                .ToArray());
         }
 
         private static Color nextColor()
@@ -56,11 +48,16 @@ namespace Lab_4.ua.cdu.edu.util
         {
             return new Horse
                 (
-                    name: nextString(7),
+                    name: nextName(),
                     speed: nextInt(Config.MIN_SPEED, Config.MAX_SPEED),
                     color: nextColor(),
                     startPosition: startPosition
                 );
+        }
+
+        private static string nextName() 
+        {
+            return NAMES[nextInt(0, NAMES.Length - 1)];
         }
     }
 }

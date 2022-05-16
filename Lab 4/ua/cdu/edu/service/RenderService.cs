@@ -17,7 +17,16 @@ namespace Lab_4.ua.cdu.edu.service
     public delegate Size ImageSize();
     public class RenderService
     {
-        private Horse targetHorse;
+        public int TargetHorse
+        {
+            get => targetHorse;
+            set
+            {
+                targetHorse = value;
+            }
+        }
+
+        private int targetHorse;
         private Image image;
         private ImageSize imageSize;
 
@@ -26,7 +35,6 @@ namespace Lab_4.ua.cdu.edu.service
 
         public RenderService(Image image, ImageSize imageSize, List<Horse> horses)
         {
-            this.targetHorse = horses[0];
             this.image = image;
             this.imageSize = imageSize;
             this.backgrounds = GenerateBackgrounds();
@@ -64,7 +72,7 @@ namespace Lab_4.ua.cdu.edu.service
 
         private void Render(DrawingContext drawingContext)
         {
-            double cameraPosition = targetHorse.Position.X + 2 * Config.HorseSize.Width / 3 - imageSize().Width / 2;
+            double cameraPosition = horses[TargetHorse].Position.X + 2 * Config.HorseSize.Width / 3 - imageSize().Width / 2;
             BackgroundView backgroundView = new BackgroundView(drawingContext);
             backgroundView.Render(cameraPosition, backgrounds);
             HorseView horseView = new HorseView(drawingContext);
