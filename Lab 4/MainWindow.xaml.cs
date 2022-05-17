@@ -29,8 +29,14 @@ namespace Lab_4
         public MainWindow()
         {
             InitializeComponent();
+
             HorseService horseService = new HorseService();
-            this.frontPresenter = new FrontPresenter(new RenderService(GameField_Image, () => new Size(Image_Column.ActualWidth, Image_Row.ActualHeight), horseService.Horses), horseService);
+            RenderService renderService = new RenderService(
+                image: GameField_Image,
+                imageSize: () => new Size(Image_Column.ActualWidth, Image_Row.ActualHeight),
+                horses: horseService.Horses);
+
+            this.frontPresenter = new FrontPresenter(renderService, horseService);
         }
 
         private void Start_Button_Click(object sender, RoutedEventArgs e)

@@ -35,7 +35,7 @@ namespace Lab_4.ua.cdu.edu
             }
         }
 
-        private bool NextStage() 
+        private bool NextStage()
         {
             bool raceOver = horseService.UpdateState();
             renderer.RenderFrame();
@@ -45,7 +45,7 @@ namespace Lab_4.ua.cdu.edu
 
         public void ResetRace()
         {
-            if (!raceInProgress) 
+            if (!raceInProgress)
             {
                 horseService.Reset();
                 renderer.RenderFrame();
