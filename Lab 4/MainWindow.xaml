@@ -32,20 +32,8 @@
 
             <ComboBox x:Name="HorseChose_Box" Height="30" Width="150" VerticalAlignment="Top" Margin="10 10" SelectionChanged="HorseChose_Box_SelectionChanged" SelectedItem="True">
                 
-                <ComboBoxItem IsSelected="True">
-                    <TextBlock Text="Horse" Background="AliceBlue" FontSize="20"/>
-                </ComboBoxItem>
-
-                <ComboBoxItem>
-                    <TextBlock Text="Horse" Background="AliceBlue" FontSize="20"/>
-                </ComboBoxItem>
-                
-                <ComboBoxItem>
-                    <TextBlock Text="Horse" Background="AliceBlue" FontSize="20"/>
-                </ComboBoxItem>
-                
             </ComboBox>
-            
+
             <Border BorderBrush="Gold" Background="ForestGreen" BorderThickness="2" CornerRadius="5">
                 <StackPanel Orientation="Vertical">
 
@@ -53,18 +41,16 @@
                         <TextBox x:Name="BetCount_Box" Text="20" Background="Transparent" Foreground="Gold" HorizontalAlignment="Center" Height="30" FontSize="24"/>
                         <TextBlock Text="$" HorizontalAlignment="Right" Foreground="Gold" FontSize="24"/>
                     </StackPanel>
-                    
+
                     <Border BorderBrush="Gold" Background="ForestGreen" BorderThickness="2" CornerRadius="5" Margin ="30 10 30 10">
                         <Button x:Name="Bet_Button" Background="Transparent" Foreground="Gold" Content="Bet" FontSize="25" FontFamily="Georgia" Click="Bet_Button_Click"/>
                     </Border>
-                    
+
                 </StackPanel>
             </Border>
-
-
-
-
         </StackPanel>
+        
+        
 
         <Grid Grid.Column="1" x:Name="GameField_Grid">
             <Grid.RowDefinitions>
@@ -75,19 +61,37 @@
             <Image Name="GameField_Image" Grid.Row="0"/>
             
             <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal">
-                <Button Content="&lt;" FontSize="46" VerticalAlignment="Bottom" Height="55" Width="55" Margin="15 5 5 10" Click="PreviousHorse_Button_Click" Background="#FFC21D" Foreground="#2E0400" FontFamily="Georgia"/>
-                <Button Content="Start" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="55" Width="150" Margin="5 5 5 10" Click="Start_Button_Click" Background="#FFC21D" Foreground="#2E0400" FontFamily="Georgia"/>
-                <Button Content="Reset" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="55" Width="150" Margin="5 5 5 10" Click="Reset_Button_Click" Background="#FFC21D" Foreground="#2E0400" FontFamily="Georgia"/>
-                <Button Content=">" FontSize="46" VerticalAlignment="Bottom" Height="55" Width="55" Margin="15 5 5 10" Click="NextHorse_Button_Click" Background="#FFC21D" Foreground="#2E0400" FontFamily="Georgia"/>
+                <Border BorderThickness="3" CornerRadius="5" BorderBrush ="#2E0400" Margin="15 5 5 10" Height="55" Width="55">
+                    <Button Content="&lt;" FontSize="46" VerticalAlignment="Bottom" Click="PreviousHorse_Button_Click" Background="#FFC21D" Foreground="#2E0400" FontFamily="Georgia"/>
+                </Border>
+                <Border BorderThickness="3" CornerRadius="5" BorderBrush ="#2E0400" Height="55" Width="150" Margin="5 5 5 10" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                    <Button Content="Start" FontSize="28" Click="Start_Button_Click" Background="#FFC21D" Foreground="#2E0400" FontFamily="Georgia"/>
+                </Border>
+                <Border BorderThickness="3" CornerRadius="5" BorderBrush ="#2E0400" Height="55" Width="150" Margin="5 5 5 10"  HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                    <Button Content="Reset" FontSize="28" Click="Reset_Button_Click" Background="#FFC21D" Foreground="#2E0400" FontFamily="Georgia"/>
+                </Border>
+                <Border BorderThickness="3" CornerRadius="5" BorderBrush ="#2E0400" Height="55" Width="55" Margin="15 5 5 10">
+                    <Button Content=">" FontSize="46" VerticalAlignment="Bottom" Click="NextHorse_Button_Click" Background="#FFC21D" Foreground="#2E0400" FontFamily="Georgia"/>
+                </Border>
+                
             </StackPanel>
 
-            <DataGrid x:Name="Horses_DataGrid" Grid.Row="1" IsReadOnly="True" Background="#310400" AutoGenerateColumns="False" RowBackground="#440400" >
+            <DataGrid x:Name="Horses_DataGrid" Grid.Row="1" IsReadOnly="True" Background="#310400" AutoGenerateColumns="False" RowBackground="#440400" Foreground="White">
+                <DataGrid.Resources>
+                    <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="#5B0400"/>
+                        <Setter Property="BorderBrush" Value="Black"/>
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <Setter Property="FontSize" Value="14"/>
+                    </Style>
+                </DataGrid.Resources>
+                
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" Width="60" Foreground="White"/>
-                    <DataGridTextColumn Header="Position" Binding="{Binding Path=Position.X, StringFormat={}{0:0.000}}" Width="130" Foreground="White"/>
-                    <DataGridTextColumn Header="Time" Binding="{Binding Path=Time, StringFormat={}{0:mm}:{0:ss}:{0:fff}}" Width="100" Foreground="White"/>
-                    <DataGridTextColumn Header="Coefficient" Binding="{Binding Path=Coefficient, StringFormat={}{0:0.00} }" Width="70" Foreground="White"/>
-                    <DataGridTextColumn Header="Finished" Binding="{Binding Path=Finished}" Width="60" Foreground="White"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" Width="60"/>
+                    <DataGridTextColumn Header="Position" Binding="{Binding Path=Position.X, StringFormat={}{0:0.000}}" Width="130"/>
+                    <DataGridTextColumn Header="Time" Binding="{Binding Path=Time, StringFormat={}{0:mm}:{0:ss}:{0:fff}}" Width="100"/>
+                    <DataGridTextColumn Header="Coefficient" Binding="{Binding Path=Coefficient, StringFormat={}{0:0.00} }" Width="70"/>
+                    <DataGridCheckBoxColumn Header="Finished" Binding="{Binding Path=Finished}" Width="60"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

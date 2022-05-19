@@ -54,8 +54,8 @@ namespace Lab_4.ua.cdu.edu.service
         private BitmapSource GetFrame()
         {
             RenderTargetBitmap bitmap = new RenderTargetBitmap(
-                Convert.ToInt32(Math.Max(imageSize().Width, 1)),
-                Convert.ToInt32(Math.Max(imageSize().Height, 1)),
+                Convert.ToInt32(Math.Max(imageSize().Width, 500)),
+                Convert.ToInt32(Math.Max(imageSize().Height, 450)),
                 Config.PIXELS_PER_DIP,
                 Config.PIXELS_PER_DIP,
                 PixelFormats.Pbgra32);
