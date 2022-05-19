@@ -1,4 +1,5 @@
 ﻿using Lab_4.ua.cdu.edu;
+using Lab_4.ua.cdu.edu.model;
 using Lab_4.ua.cdu.edu.service;
 
 using System;
@@ -34,9 +35,12 @@ namespace Lab_4
             RenderService renderService = new RenderService(
                 image: GameField_Image,
                 imageSize: () => new Size(Image_Column.ActualWidth, Image_Row.ActualHeight),
-                horses: horseService.Horses);
+                horses: horseService.Horses,
+                Horses_DataGrid);
+            
 
             this.frontPresenter = new FrontPresenter(renderService, horseService);
+            frontPresenter.GenerateHorseChoseBox(HorseChose_Box);
         }
 
         private void Start_Button_Click(object sender, RoutedEventArgs e)
@@ -57,6 +61,16 @@ namespace Lab_4
         private void Reset_Button_Click(object sender, RoutedEventArgs e)
         {
             frontPresenter.ResetRace();
+        }
+
+        private void HorseChose_Box_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxItem selectedItem = (ComboBoxItem)((ComboBox)sender).SelectedItem;
+        }
+
+        private void Bet_Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

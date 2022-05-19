@@ -1,4 +1,5 @@
-﻿using Lab_4.ua.cdu.edu.service;
+﻿using Lab_4.ua.cdu.edu.model.bind;
+using Lab_4.ua.cdu.edu.service;
 using Lab_4.ua.cdu.edu.util;
 
 using System;
@@ -13,7 +14,7 @@ using System.Windows.Media.Imaging;
 
 namespace Lab_4.ua.cdu.edu.model
 {
-    public class Horse : IComparable<Horse>
+    public class Horse : PropertyChangedNotifier, IComparable<Horse>
     {
         public string Name { get; private set; }
         public Color Color { get; private set; }
@@ -22,7 +23,7 @@ namespace Lab_4.ua.cdu.edu.model
         public TimeSpan Time { get; private set; }
 
         public Point Position { get; set; }
-        public double Speed;
+        public double Speed { get; set; }
 
         public double Coefficient { get; set; }
         public bool Finished { get; set; }
@@ -31,7 +32,7 @@ namespace Lab_4.ua.cdu.edu.model
         {
             Name = name;
             Color = color;
-            Speed = speed;
+            this.Speed = speed;
             Position = GetInitialPosition(startPosition);
         }
 
@@ -53,6 +54,11 @@ namespace Lab_4.ua.cdu.edu.model
                 State = (State + 1) % Config.STATES_COUNT;
             }
             Position = new Point(Position.X + ChangeSpeed(), Position.Y);
+
+            base.OnPropertyChanged("Time");
+            base.OnPropertyChanged("Position");
+            base.OnPropertyChanged("Finished");
+            base.OnPropertyChanged("Coeficient");
         }
 
         private double ChangeSpeed()

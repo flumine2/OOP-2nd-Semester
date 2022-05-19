@@ -1,4 +1,5 @@
-﻿using Lab_4.ua.cdu.edu.service;
+﻿using Lab_4.ua.cdu.edu.model;
+using Lab_4.ua.cdu.edu.service;
 
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace Lab_4.ua.cdu.edu
 {
@@ -40,6 +44,7 @@ namespace Lab_4.ua.cdu.edu
             bool raceOver = horseService.UpdateState();
             renderer.RenderFrame();
 
+
             return raceOver;
         }
 
@@ -60,6 +65,44 @@ namespace Lab_4.ua.cdu.edu
         public void PreviousHorse() 
         {
             renderer.TargetHorse = horseService.PreviousHorse(renderer.TargetHorse);
+        }
+
+        public void GenerateHorseChoseBox(ComboBox comboBox)
+        {
+            List<ComboBoxItem> horsesData = new();
+
+            foreach (Horse horse in horseService.Horses)
+            {
+                horsesData.Add(GenerateHorseChoseBoxItem(horse));
+            }
+
+            comboBox.Items.Clear();
+            comboBox.ItemsSource = horsesData;
+        }
+
+        private ComboBoxItem GenerateHorseChoseBoxItem(Horse horse)
+        {
+            return new ComboBoxItem
+            {
+                Background = Brushes.Black,
+                Content = new StackPanel
+                {
+                    Orientation = Orientation.Horizontal,
+                    Children = {
+                            new Rectangle
+                            {
+                                Fill = new SolidColorBrush(horse.Color),
+                                Width = 20,
+                                Height = 20
+                            },
+                            new Label
+                            {
+                                Content = horse.Name,
+                                Foreground = Brushes.White
+                            }
+                        }
+                }
+            };
         }
     }
 }

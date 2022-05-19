@@ -18,7 +18,7 @@ namespace Lab_4.ua.cdu.edu.view
 
         protected abstract void Render(T item);
 
-        public void Render(List<T> items)
+        public virtual void Render(List<T> items)
         {
             items.ForEach(item => Render(item));
         }

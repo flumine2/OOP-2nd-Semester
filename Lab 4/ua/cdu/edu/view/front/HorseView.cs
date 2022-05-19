@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace Lab_4.ua.cdu.edu.view
@@ -16,11 +17,13 @@ namespace Lab_4.ua.cdu.edu.view
     {
         private AnimationService<Horse> animationService;
         private double cameraPosition;
+        private DataGrid dataGrid;
 
-        public HorseView(DrawingContext drawingContext, double cameraPosition) : base(drawingContext)
+        public HorseView(DrawingContext drawingContext, double cameraPosition, DataGrid dataGrid) : base(drawingContext)
         {
             this.animationService = HorseAnimationService.Instance;
             this.cameraPosition = cameraPosition;
+            this.dataGrid = dataGrid;
         }
 
         protected override void Render(Horse horse)
@@ -38,6 +41,11 @@ namespace Lab_4.ua.cdu.edu.view
             );
         }
 
+        public override void Render(List<Horse> horses)
+        {
+            base.Render(horses);
 
+            dataGrid.ItemsSource = horses;
+        }
     }
 }

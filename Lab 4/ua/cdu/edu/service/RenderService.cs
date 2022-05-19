@@ -29,16 +29,18 @@ namespace Lab_4.ua.cdu.edu.service
         private int targetHorse;
         private Image image;
         private ImageSize imageSize;
+        private DataGrid dataGrid;
 
         private List<Background> backgrounds;
         private List<Horse> horses;
 
-        public RenderService(Image image, ImageSize imageSize, List<Horse> horses)
+        public RenderService(Image image, ImageSize imageSize, List<Horse> horses, DataGrid dataGrid)
         {
             this.image = image;
             this.imageSize = imageSize;
             this.backgrounds = GenerateBackgrounds();
             this.horses = horses;
+            this.dataGrid = dataGrid;
         }
 
         private List<Background> GenerateBackgrounds()
@@ -75,7 +77,7 @@ namespace Lab_4.ua.cdu.edu.service
             double cameraPosition = horses[TargetHorse].Position.X + 2 * Config.HorseSize.Width / 3 - imageSize().Width / 2;
             BackgroundView backgroundView = new BackgroundView(drawingContext, cameraPosition);
             backgroundView.Render(backgrounds);
-            HorseView horseView = new HorseView(drawingContext, cameraPosition);
+            HorseView horseView = new HorseView(drawingContext, cameraPosition, dataGrid);
             horseView.Render(horses);
         }
     }

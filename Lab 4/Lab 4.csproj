@@ -62,6 +62,7 @@
     <Compile Include="ua\cdu\edu\Config.cs" />
     <Compile Include="ua\cdu\edu\exception\TransactionException.cs" />
     <Compile Include="ua\cdu\edu\model\Bet.cs" />
+    <Compile Include="ua\cdu\edu\model\bind\PropertyChangedNotifier.cs" />
     <Compile Include="ua\cdu\edu\presenter\FrontPresenter.cs" />
     <Compile Include="ua\cdu\edu\model\Background.cs" />
     <Compile Include="ua\cdu\edu\service\animation\AnimationService.cs" />
@@ -146,6 +147,8 @@
     <Resource Include="Resources\Horses\WithOutBorder_0010.png" />
     <Resource Include="Resources\Horses\WithOutBorder_0011.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Bets\BetHeader.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
