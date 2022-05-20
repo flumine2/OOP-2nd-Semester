@@ -29,18 +29,18 @@ namespace Lab_4.ua.cdu.edu.service
         private int targetHorse;
         private Image image;
         private ImageSize imageSize;
-        private DataGrid dataGrid;
+        private DataGrid horseInfo;
 
         private List<Background> backgrounds;
         private List<Horse> horses;
 
-        public RenderService(Image image, ImageSize imageSize, List<Horse> horses, DataGrid dataGrid)
+        public RenderService(Image image, ImageSize imageSize, List<Horse> horses, DataGrid horseInfo)
         {
             this.image = image;
             this.imageSize = imageSize;
             this.backgrounds = GenerateBackgrounds();
             this.horses = horses;
-            this.dataGrid = dataGrid;
+            this.horseInfo = horseInfo;
         }
 
         private List<Background> GenerateBackgrounds()
@@ -54,8 +54,8 @@ namespace Lab_4.ua.cdu.edu.service
         private BitmapSource GetFrame()
         {
             RenderTargetBitmap bitmap = new RenderTargetBitmap(
-                Convert.ToInt32(Math.Max(imageSize().Width, 500)),
-                Convert.ToInt32(Math.Max(imageSize().Height, 450)),
+                Convert.ToInt32(Math.Max(imageSize().Width, Config.TRACK_WIDTH)),
+                Convert.ToInt32(Math.Max(imageSize().Height, Config.TRACK_HEIGHT)),
                 Config.PIXELS_PER_DIP,
                 Config.PIXELS_PER_DIP,
                 PixelFormats.Pbgra32);
@@ -77,7 +77,7 @@ namespace Lab_4.ua.cdu.edu.service
             double cameraPosition = horses[TargetHorse].Position.X + 2 * Config.HorseSize.Width / 3 - imageSize().Width / 2;
             BackgroundView backgroundView = new BackgroundView(drawingContext, cameraPosition);
             backgroundView.Render(backgrounds);
-            HorseView horseView = new HorseView(drawingContext, cameraPosition, dataGrid);
+            HorseView horseView = new HorseView(drawingContext, cameraPosition);
             horseView.Render(horses);
         }
     }

@@ -30,15 +30,14 @@
                 <Image Source="Resources/Bets/BetHeader.png" Width="100" Grid.Column="1"/>
             </Grid>
 
-            <ComboBox x:Name="HorseChose_Box" Height="30" Width="150" VerticalAlignment="Top" Margin="10 10" SelectionChanged="HorseChose_Box_SelectionChanged" SelectedItem="True">
-                
+            <ComboBox x:Name="HorseSelection_Box" Height="30" Width="150" VerticalAlignment="Top" Margin="10 10">
             </ComboBox>
 
             <Border BorderBrush="Gold" Background="ForestGreen" BorderThickness="2" CornerRadius="5">
                 <StackPanel Orientation="Vertical">
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <TextBox x:Name="BetCount_Box" Text="20" Background="Transparent" Foreground="Gold" HorizontalAlignment="Center" Height="30" FontSize="24"/>
+                        <TextBox x:Name="BetAmount_Box" Text="20" Background="Transparent" Foreground="Gold" HorizontalAlignment="Center" Height="30" FontSize="24" BorderThickness="0"/>
                         <TextBlock Text="$" HorizontalAlignment="Right" Foreground="Gold" FontSize="24"/>
                     </StackPanel>
 
@@ -49,8 +48,6 @@
                 </StackPanel>
             </Border>
         </StackPanel>
-        
-        
 
         <Grid Grid.Column="1" x:Name="GameField_Grid">
             <Grid.RowDefinitions>
@@ -58,7 +55,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Image Name="GameField_Image" Grid.Row="0"/>
+            <Image x:Name="GameField_Image" Grid.Row="0"/>
             
             <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal">
                 <Border BorderThickness="3" CornerRadius="5" BorderBrush ="#2E0400" Margin="15 5 5 10" Height="55" Width="55">
@@ -92,6 +89,7 @@
                     <DataGridTextColumn Header="Time" Binding="{Binding Path=Time, StringFormat={}{0:mm}:{0:ss}:{0:fff}}" Width="100"/>
                     <DataGridTextColumn Header="Coefficient" Binding="{Binding Path=Coefficient, StringFormat={}{0:0.00} }" Width="70"/>
                     <DataGridCheckBoxColumn Header="Finished" Binding="{Binding Path=Finished}" Width="60"/>
+                    <DataGridTextColumn Header="Bet" Binding="{Binding Path=Bet}" Width="60"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

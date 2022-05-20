@@ -13,7 +13,8 @@ namespace Lab_4.ua.cdu.edu.service
 {
     public class HorseService
     {
-        public static Stopwatch TIMER = new();
+        private static readonly Stopwatch TIMER = new();
+
         private List<Horse> horses;
 
         public List<Horse> Horses
@@ -27,7 +28,6 @@ namespace Lab_4.ua.cdu.edu.service
 
         public HorseService()
         {
-            TIMER.Start();
             this.horses = RandomUtil.randomHorses(Config.HORSES_COUNT);
             setCoefficients();
         }
@@ -51,14 +51,13 @@ namespace Lab_4.ua.cdu.edu.service
                 if (!horse.Finished) 
                 {
                     raceOver = false;
-                    horse.UpdateState();
+                    horse.UpdateState(TIMER.Elapsed);
                 }
             }
             if (raceOver) 
             {
                 TIMER.Stop();
             }
-            horses.Sort();
 
             return raceOver;
         }
@@ -76,11 +75,24 @@ namespace Lab_4.ua.cdu.edu.service
 
         public void Reset() 
         {
-            for (int i = 0; i < horses.Count; i++) 
-            {
-                horses[i].Finished = false;
-                horses[i].Position = new Point(0, horses[i].Position.Y);
-            }
+            TIMER.Reset();
+            horses.ForEach(horse => horse.Reset());
+        }
+
+        public void StartRace() 
+        {
+            TIMER.Start();
+        }
+
+        public string Bet(Bet bet) 
+        {
+            horses[bet.HorseIndex].Bet += bet.Amount; 
+            return horses[bet.HorseIndex].Name;
+        }
+
+        public Horse GetWinnerHorse() 
+        {
+            return horses.Max();
         }
     }
 }

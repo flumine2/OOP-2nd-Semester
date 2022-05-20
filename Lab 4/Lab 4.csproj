@@ -70,7 +70,7 @@
     <Compile Include="ua\cdu\edu\service\BetService.cs" />
     <Compile Include="ua\cdu\edu\service\SchedulerExecutor.cs" />
     <Compile Include="ua\cdu\edu\view\front\BackgroundView.cs" />
-    <Compile Include="ua\cdu\edu\view\BalanceView.cs" />
+    <Compile Include="ua\cdu\edu\view\BetView.cs" />
     <Compile Include="ua\cdu\edu\view\front\HorseView.cs" />
     <Compile Include="ua\cdu\edu\util\RandomUtil.cs" />
     <Compile Include="ua\cdu\edu\view\View.cs" />

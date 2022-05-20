@@ -1,6 +1,7 @@
 ﻿using Lab_4.ua.cdu.edu;
 using Lab_4.ua.cdu.edu.model;
 using Lab_4.ua.cdu.edu.service;
+using Lab_4.ua.cdu.edu.view;
 
 using System;
 using System.Collections.Generic;
@@ -32,15 +33,22 @@ namespace Lab_4
             InitializeComponent();
 
             HorseService horseService = new HorseService();
+            BetService betService = new BetService(horseService);
             RenderService renderService = new RenderService(
                 image: GameField_Image,
                 imageSize: () => new Size(Image_Column.ActualWidth, Image_Row.ActualHeight),
                 horses: horseService.Horses,
-                Horses_DataGrid);
-            
+                horseInfo: Horses_DataGrid);
 
-            this.frontPresenter = new FrontPresenter(renderService, horseService);
-            frontPresenter.GenerateHorseChoseBox(HorseChose_Box);
+            HorseView startUpHorseView = new HorseView(Horses_DataGrid, HorseSelection_Box);
+            BetView betView = new BetView(HorseSelection_Box, BetAmount_Box, BalanceField);
+
+            this.frontPresenter = new FrontPresenter(
+                renderer: renderService,
+                horseService: horseService,
+                betService: betService,
+                startUpHorseView: startUpHorseView,
+                betView: betView);
         }
 
         private void Start_Button_Click(object sender, RoutedEventArgs e)
@@ -63,14 +71,9 @@ namespace Lab_4
             frontPresenter.ResetRace();
         }
 
-        private void HorseChose_Box_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBoxItem selectedItem = (ComboBoxItem)((ComboBox)sender).SelectedItem;
-        }
-
         private void Bet_Button_Click(object sender, RoutedEventArgs e)
         {
-
+            frontPresenter.ProcessBet();
         }
     }
 }

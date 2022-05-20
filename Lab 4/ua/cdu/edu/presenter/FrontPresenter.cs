@@ -1,12 +1,12 @@
 ﻿using Lab_4.ua.cdu.edu.model;
 using Lab_4.ua.cdu.edu.service;
+using Lab_4.ua.cdu.edu.view;
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -21,21 +21,40 @@ namespace Lab_4.ua.cdu.edu
 
         private readonly RenderService renderer;
         private readonly HorseService horseService;
+        private readonly BetService betService;
+        private readonly HorseView startUpHorseView;
+        private readonly BetView betView;
 
-        public FrontPresenter(RenderService renderer, HorseService horseService)
+        public FrontPresenter(RenderService renderer, HorseService horseService, BetService betService, HorseView startUpHorseView, BetView betView)
         {
             this.renderer = renderer;
             this.horseService = horseService;
+            this.betService = betService;
+            this.startUpHorseView = startUpHorseView;
+            this.betView = betView;
+            Init();
+        }
+
+        private void Init() 
+        {
             renderer.RenderFrame();
+            betView.Render(betService.Balance);
+            startUpHorseView.RenderHorseInfo(horseService.Horses);
+            startUpHorseView.RenderHorseSelection(horseService.Horses);
         }
 
         public async void StartRace() 
         {
             if (!raceInProgress) 
             {
+                horseService.StartRace();
                 raceInProgress = true;
                 await SchedulerExecutor.schedule(NextStage, SECOND / Config.FPS);
                 raceInProgress = false;
+
+                betService.RecalculateBalance(horseService.GetWinnerHorse());
+                betView.Render(betService.Balance);
+                betService.Reset();
             }
         }
 
@@ -67,42 +86,21 @@ namespace Lab_4.ua.cdu.edu
             renderer.TargetHorse = horseService.PreviousHorse(renderer.TargetHorse);
         }
 
-        public void GenerateHorseChoseBox(ComboBox comboBox)
+        public void ProcessBet() 
         {
-            List<ComboBoxItem> horsesData = new();
-
-            foreach (Horse horse in horseService.Horses)
+            if (!raceInProgress) 
             {
-                horsesData.Add(GenerateHorseChoseBoxItem(horse));
-            }
-
-            comboBox.Items.Clear();
-            comboBox.ItemsSource = horsesData;
-        }
-
-        private ComboBoxItem GenerateHorseChoseBoxItem(Horse horse)
-        {
-            return new ComboBoxItem
-            {
-                Background = Brushes.Black,
-                Content = new StackPanel
+                try
                 {
-                    Orientation = Orientation.Horizontal,
-                    Children = {
-                            new Rectangle
-                            {
-                                Fill = new SolidColorBrush(horse.Color),
-                                Width = 20,
-                                Height = 20
-                            },
-                            new Label
-                            {
-                                Content = horse.Name,
-                                Foreground = Brushes.White
-                            }
-                        }
+                    Bet bet = betView.Bind();
+                    betService.Bet(bet);
+                    betView.Render(betService.Balance);
                 }
-            };
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+            }
         }
     }
 }

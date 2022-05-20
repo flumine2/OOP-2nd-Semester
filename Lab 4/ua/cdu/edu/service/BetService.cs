@@ -17,24 +17,31 @@ namespace Lab_4.ua.cdu.edu.service
             get => balance;
             private set => balance = value;
         }
-        
+
+        private HorseService horseService;
         private Dictionary<string, int> bets = new Dictionary<string, int>();
 
-        public void Bet(int amount, string horseName) 
+        public BetService(HorseService horseService)
         {
-            if (balance - amount < 0) 
-            {
-                throw new TransactionException($"No enough money to finish a transaction. Provided: {balance}. Required: {amount}");
-            }
-            balance -= amount;
+            this.horseService = horseService;
+        }
 
-            if (bets.ContainsKey(horseName)) 
+        public void Bet(Bet bet) 
+        {
+            if (balance - bet.Amount < 0) 
             {
-                bets[horseName] = bets[horseName] + amount;
+                throw new TransactionException($"No enough money to finish a transaction. Provided: {balance}. Required: {bet.Amount}");
+            }
+            string targetHorse = horseService.Bet(bet);
+            balance -= bet.Amount;
+
+            if (bets.ContainsKey(targetHorse)) 
+            {
+                bets[targetHorse] = bets[targetHorse] + bet.Amount;
             }
             else 
             {
-                bets[horseName] = amount;
+                bets[targetHorse] = bet.Amount;
             }
         }
 

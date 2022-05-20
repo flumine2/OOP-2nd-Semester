@@ -28,6 +28,16 @@ namespace Lab_4.ua.cdu.edu.model
         public double Coefficient { get; set; }
         public bool Finished { get; set; }
 
+        private int bet;
+        public int Bet {
+            get => bet;
+            set
+            {
+                bet = value;
+                OnPropertyChanged("Bet");
+            }
+        }
+
         public Horse(string name, Color color, double speed, int startPosition)
         {
             Name = name;
@@ -41,9 +51,9 @@ namespace Lab_4.ua.cdu.edu.model
             return new Point(0, 160 + (startPosition - 1) * Config.HorseSize.Height / 2);
         }
 
-        public void UpdateState()
+        public void UpdateState(TimeSpan timeSpan)
         {
-            Time = HorseService.TIMER.Elapsed;
+            Time = timeSpan;
             if (Position.X > Config.TRACK_LENGTH)
             {
                 Finished = true;
@@ -66,15 +76,16 @@ namespace Lab_4.ua.cdu.edu.model
             return Speed * RandomUtil.nextDouble(0.7, 1.3);
         }
 
+        public void Reset() 
+        {
+            Finished = false;
+            Bet = 0;
+            Position = new Point(0, Position.Y);
+        }
+
         public int CompareTo(Horse other)
         {
-            int diff = Time.CompareTo(other.Time);
-            if (diff != 0) 
-            {
-                return diff;
-            }
-
-            return Position.X.CompareTo(other.Position.X);
+            return -Time.CompareTo(other.Time);
         }
     }
 }
