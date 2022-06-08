@@ -17,16 +17,15 @@ namespace Lab_4
         {
             InitializeComponent();
 
-            HorseService horseService = new HorseService();
-            BetService betService = new BetService(horseService);
-            RenderService renderService = new RenderService(
+            HorseService horseService = new();
+            BetService betService = new(horseService);
+            RenderService renderService = new(
                 image: GameField_Image,
                 imageSize: () => new Size(Image_Column.ActualWidth, Image_Row.ActualHeight),
-                horses: horseService.Horses,
-                horseInfo: Horses_DataGrid);
+                horses: horseService.Horses);
 
-            HorseView startUpHorseView = new HorseView(Horses_DataGrid, HorseSelection_Box);
-            BetView betView = new BetView(HorseSelection_Box, BetAmount_Box, BalanceField);
+            HorseView startUpHorseView = new(Horses_DataGrid, HorseSelection_Box);
+            BetView betView = new(HorseSelection_Box, BetAmount_Box, BalanceField);
 
             this.frontPresenter = new FrontPresenter(
                 renderer: renderService,

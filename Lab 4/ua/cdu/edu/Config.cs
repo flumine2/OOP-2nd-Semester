@@ -18,7 +18,7 @@ namespace Lab_4.ua.cdu.edu
         public static readonly int SELECTION_WIDTH = 20;
         public static readonly int SELECTION_HEIGHT = 20;
 
-        public static readonly Size BackgroundSize = new Size(800, 820);
-        public static readonly Size HorseSize = new Size(130, 90);
+        public static readonly Size BackgroundSize = new(800, 820);
+        public static readonly Size HorseSize = new(130, 90);
     }
 }

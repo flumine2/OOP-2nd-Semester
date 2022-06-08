@@ -5,11 +5,11 @@ using System.Windows.Controls;
 
 namespace Lab_4.ua.cdu.edu.view
 {
-    public class BetView : View<Bet, int>
+    public class BetView : IView<Bet, int>
     {
-        private ComboBox horseSelectionBox;
-        private TextBox betAmountBox;
-        private TextBlock balanceField;
+        private readonly ComboBox horseSelectionBox;
+        private readonly TextBox betAmountBox;
+        private readonly TextBlock balanceField;
 
         public BetView(ComboBox horseSelectionBox, TextBox betAmountBox, TextBlock balanceField)
         {
@@ -20,7 +20,7 @@ namespace Lab_4.ua.cdu.edu.view
 
         public Bet Bind()
         {
-            Bet bet = new Bet();
+            Bet bet = new();
             bet.HorseIndex = Math.Max(horseSelectionBox.SelectedIndex, 0);
             bet.Amount = Math.Abs(int.Parse(betAmountBox.Text));
 

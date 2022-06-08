@@ -65,7 +65,7 @@
     <Compile Include="ua\cdu\edu\model\bind\PropertyChangedNotifier.cs" />
     <Compile Include="ua\cdu\edu\presenter\FrontPresenter.cs" />
     <Compile Include="ua\cdu\edu\model\Background.cs" />
-    <Compile Include="ua\cdu\edu\service\animation\AnimationService.cs" />
+    <Compile Include="ua\cdu\edu\service\animation\IAnimationService.cs" />
     <Compile Include="ua\cdu\edu\service\animation\HorseAnimationService.cs" />
     <Compile Include="ua\cdu\edu\service\BetService.cs" />
     <Compile Include="ua\cdu\edu\service\SchedulerExecutor.cs" />
@@ -73,7 +73,7 @@
     <Compile Include="ua\cdu\edu\view\BetView.cs" />
     <Compile Include="ua\cdu\edu\view\front\HorseView.cs" />
     <Compile Include="ua\cdu\edu\util\RandomUtil.cs" />
-    <Compile Include="ua\cdu\edu\view\View.cs" />
+    <Compile Include="ua\cdu\edu\view\IView.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

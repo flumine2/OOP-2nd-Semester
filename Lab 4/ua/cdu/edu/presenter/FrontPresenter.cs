@@ -9,53 +9,53 @@ namespace Lab_4.ua.cdu.edu
 {
     public class FrontPresenter
     {
-        private static readonly int SECOND = 1000;
+        private const int SECOND = 1000;
 
-        private bool raceInProgress;
+        private bool _raceInProgress;
 
-        private readonly RenderService renderer;
-        private readonly HorseService horseService;
-        private readonly BetService betService;
-        private readonly HorseView startUpHorseView;
-        private readonly BetView betView;
+        private readonly RenderService _renderer;
+        private readonly HorseService _horseService;
+        private readonly BetService _betService;
+        private readonly HorseView _startUpHorseView;
+        private readonly BetView _betView;
 
         public FrontPresenter(RenderService renderer, HorseService horseService, BetService betService, HorseView startUpHorseView, BetView betView)
         {
-            this.renderer = renderer;
-            this.horseService = horseService;
-            this.betService = betService;
-            this.startUpHorseView = startUpHorseView;
-            this.betView = betView;
+            _renderer = renderer;
+            _horseService = horseService;
+            _betService = betService;
+            _startUpHorseView = startUpHorseView;
+            _betView = betView;
             Init();
         }
 
         private void Init()
         {
-            renderer.RenderFrame();
-            betView.Render(betService.Balance);
-            startUpHorseView.RenderHorseInfo(horseService.Horses);
-            startUpHorseView.RenderHorseSelection(horseService.Horses);
+            _renderer.RenderFrame();
+            _betView.Render(_betService.Balance);
+            _startUpHorseView.RenderHorseInfo(_horseService.Horses);
+            _startUpHorseView.RenderHorseSelection(_horseService.Horses);
         }
 
         public async void StartRace()
         {
-            if (!raceInProgress)
+            if (!_raceInProgress)
             {
-                horseService.StartRace();
-                raceInProgress = true;
-                await SchedulerExecutor.schedule(NextStage, SECOND / Config.FPS);
-                raceInProgress = false;
+                _horseService.StartRace();
+                _raceInProgress = true;
+                await SchedulerExecutor.Schedule(NextStage, SECOND / Config.FPS);
+                _raceInProgress = false;
 
-                betService.RecalculateBalance(horseService.GetWinnerHorse());
-                betView.Render(betService.Balance);
-                betService.Reset();
+                _betService.RecalculateBalance(_horseService.GetWinnerHorse());
+                _betView.Render(_betService.Balance);
+                _betService.Reset();
             }
         }
 
         private bool NextStage()
         {
-            bool raceOver = horseService.UpdateState();
-            renderer.RenderFrame();
+            bool raceOver = _horseService.UpdateState();
+            _renderer.RenderFrame();
 
 
             return raceOver;
@@ -63,32 +63,32 @@ namespace Lab_4.ua.cdu.edu
 
         public void ResetRace()
         {
-            if (!raceInProgress)
+            if (!_raceInProgress)
             {
-                horseService.Reset();
-                renderer.RenderFrame();
+                _horseService.Reset();
+                _renderer.RenderFrame();
             }
         }
 
         public void NextHorse()
         {
-            renderer.TargetHorse = horseService.NextHorse(renderer.TargetHorse);
+            _renderer.TargetHorse = _horseService.NextHorse(_renderer.TargetHorse);
         }
 
         public void PreviousHorse()
         {
-            renderer.TargetHorse = horseService.PreviousHorse(renderer.TargetHorse);
+            _renderer.TargetHorse = _horseService.PreviousHorse(_renderer.TargetHorse);
         }
 
         public void ProcessBet()
         {
-            if (!raceInProgress)
+            if (!_raceInProgress)
             {
                 try
                 {
-                    Bet bet = betView.Bind();
-                    betService.Bet(bet);
-                    betView.Render(betService.Balance);
+                    Bet bet = _betView.Bind();
+                    _betService.Bet(bet);
+                    _betView.Render(_betService.Balance);
                 }
                 catch (Exception e)
                 {

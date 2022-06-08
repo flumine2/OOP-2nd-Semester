@@ -21,13 +21,13 @@ namespace Lab_4.ua.cdu.edu.model
         public double Coefficient { get; set; }
         public bool Finished { get; set; }
 
-        private int bet;
+        private int _bet;
         public int Bet
         {
-            get => bet;
+            get => _bet;
             set
             {
-                bet = value;
+                _bet = value;
                 OnPropertyChanged("Bet");
             }
         }
@@ -36,7 +36,7 @@ namespace Lab_4.ua.cdu.edu.model
         {
             Name = name;
             Color = color;
-            this.Speed = speed;
+            Speed = speed;
             Position = GetInitialPosition(startPosition);
         }
 
@@ -67,7 +67,7 @@ namespace Lab_4.ua.cdu.edu.model
 
         private double ChangeSpeed()
         {
-            return Speed * RandomUtil.nextDouble(0.7, 1.3);
+            return Speed * RandomUtil.NextDouble(0.7, 1.3);
         }
 
         public void Reset()

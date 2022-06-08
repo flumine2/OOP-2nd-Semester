@@ -9,10 +9,10 @@ using System.Windows.Media.Imaging;
 
 namespace Lab_4.ua.cdu.edu.service.animation
 {
-    public class HorseAnimationService : AnimationService<Horse>
+    public class HorseAnimationService : IAnimationService<Horse>
     {
         public static HorseAnimationService Instance { get; } = new();
-        private Dictionary<Color, List<ImageSource>> animationCache = new Dictionary<Color, List<ImageSource>>();
+        private readonly Dictionary<Color, List<ImageSource>> animationCache = new();
 
         static HorseAnimationService()
         {
@@ -20,11 +20,9 @@ namespace Lab_4.ua.cdu.edu.service.animation
             Directory.SetCurrentDirectory("..");
         }
 
-        private HorseAnimationService()
-        {
-        }
+        private HorseAnimationService() { }
 
-        public List<ImageSource> animate(Horse item)
+        public List<ImageSource> Animate(Horse item)
         {
             if (animationCache.ContainsKey(item.Color))
             {

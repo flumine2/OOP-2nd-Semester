@@ -25,19 +25,19 @@ namespace Lab_4.ua.cdu.edu.service
 
         public HorseService()
         {
-            this.horses = RandomUtil.randomHorses(Config.HORSES_COUNT);
-            setCoefficients();
+            this.horses = RandomUtil.RandomHorses(Config.HORSES_COUNT);
+            SetCoefficients();
         }
 
-        private void setCoefficients()
+        private void SetCoefficients()
         {
             double maxSpeed = horses.Select(horse => horse.Speed).Max();
-            horses.ForEach(horse => horse.Coefficient = nextCoefficient(horse.Speed, maxSpeed));
+            horses.ForEach(horse => horse.Coefficient = NextCoefficient(horse.Speed, maxSpeed));
         }
 
-        private double nextCoefficient(double speed, double maxSpeed)
+        private double NextCoefficient(double speed, double maxSpeed)
         {
-            return Math.Max(3 * (maxSpeed - speed) + 1 + RandomUtil.nextDouble(-0.5, 0.5), Config.MIN_COEFFICIENT);
+            return Math.Max(3 * (maxSpeed - speed) + 1 + RandomUtil.NextDouble(-0.5, 0.5), Config.MIN_COEFFICIENT);
         }
 
         public bool UpdateState()

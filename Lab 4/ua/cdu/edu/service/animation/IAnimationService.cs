@@ -3,8 +3,8 @@ using System.Windows.Media;
 
 namespace Lab_4.ua.cdu.edu.service.animation
 {
-    public interface AnimationService<T>
+    public interface IAnimationService<T>
     {
-        List<ImageSource> animate(T item);
+        List<ImageSource> Animate(T item);
     }
 }

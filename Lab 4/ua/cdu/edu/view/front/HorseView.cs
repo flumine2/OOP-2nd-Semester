@@ -11,10 +11,10 @@ namespace Lab_4.ua.cdu.edu.view
 {
     public class HorseView : FrontView<Horse>
     {
-        private AnimationService<Horse> animationService;
-        private double cameraPosition;
-        private DataGrid horseInfo;
-        private ComboBox horseSelection;
+        private readonly IAnimationService<Horse> animationService;
+        private readonly double cameraPosition;
+        private readonly DataGrid horseInfo;
+        private readonly ComboBox horseSelection;
 
         public HorseView(DrawingContext drawingContext, double cameraPosition) : base(drawingContext)
         {
@@ -30,7 +30,7 @@ namespace Lab_4.ua.cdu.edu.view
 
         protected override void Render(Horse horse)
         {
-            List<ImageSource> animation = animationService.animate(horse);
+            List<ImageSource> animation = animationService.Animate(horse);
             drawingContext.DrawImage(
                 animation[horse.State],
                 new Rect

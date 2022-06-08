@@ -15,8 +15,8 @@ namespace Lab_4.ua.cdu.edu.service
             private set => balance = value;
         }
 
-        private HorseService horseService;
-        private Dictionary<string, int> bets = new Dictionary<string, int>();
+        private readonly HorseService horseService;
+        private readonly Dictionary<string, int> bets = new();
 
         public BetService(HorseService horseService)
         {

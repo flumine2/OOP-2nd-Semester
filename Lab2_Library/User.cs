@@ -10,22 +10,22 @@ namespace LibraryFor2ndLab
 
         [Required]
         [StringLength(30, MinimumLength = 1)]
-        private string _username;
+        private readonly string _username;
 
         [Required]
         [StringLength(20, MinimumLength = 8)]
         [DataType(DataType.Password)]
-        private string _password;
+        private readonly string _password;
 
         [Required]
         [RegularExpression(@"[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$",
          ErrorMessage = "Characters are not allowed.")]
-        private string _email;
+        private readonly string _email;
 
         [Required]
         [RegularExpression(@"(\+38)?0(50|63|67|68|93|95|96|97|98|99)-?\d{3}-?\d{2}-?\d{2}",
          ErrorMessage = "Invalid form of .")]
-        private string _phone;
+        private readonly string _phone;
 
         public string Username
         {

@@ -13,7 +13,7 @@ namespace Lab_2
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Random random = new();
             List<ServiceDesk> desks = GenerateUtility.GetRandomServiceDeskModelsList(10, random);

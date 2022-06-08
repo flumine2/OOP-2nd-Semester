@@ -11,32 +11,31 @@ using System.Windows.Media.Imaging;
 namespace Lab_4.ua.cdu.edu.service
 {
     public delegate Size ImageSize();
+
     public class RenderService
     {
+        private int _targetHorse;
+        private readonly Image _image;
+        private readonly ImageSize _imageSize;
+
+        private readonly List<Background> _backgrounds;
+        private readonly List<Horse> _horses;
+
         public int TargetHorse
         {
-            get => targetHorse;
+            get => _targetHorse;
             set
             {
-                targetHorse = value;
+                _targetHorse = value;
             }
         }
 
-        private int targetHorse;
-        private Image image;
-        private ImageSize imageSize;
-        private DataGrid horseInfo;
-
-        private List<Background> backgrounds;
-        private List<Horse> horses;
-
-        public RenderService(Image image, ImageSize imageSize, List<Horse> horses, DataGrid horseInfo)
+        public RenderService(Image image, ImageSize imageSize, List<Horse> horses)
         {
-            this.image = image;
-            this.imageSize = imageSize;
-            this.backgrounds = GenerateBackgrounds();
-            this.horses = horses;
-            this.horseInfo = horseInfo;
+            _image = image;
+            _imageSize = imageSize;
+            _backgrounds = GenerateBackgrounds();
+            _horses = horses;
         }
 
         private List<Background> GenerateBackgrounds()
@@ -45,13 +44,13 @@ namespace Lab_4.ua.cdu.edu.service
             return backgrounds.Select((x, index) => new Background((int)Config.BackgroundSize.Width * index)).ToList();
         }
 
-        public void RenderFrame() => image.Source = GetFrame();
+        public void RenderFrame() => _image.Source = GetFrame();
 
         private BitmapSource GetFrame()
         {
-            RenderTargetBitmap bitmap = new RenderTargetBitmap(
-                Convert.ToInt32(Math.Max(imageSize().Width, Config.TRACK_WIDTH)),
-                Convert.ToInt32(Math.Max(imageSize().Height, Config.TRACK_HEIGHT)),
+            RenderTargetBitmap bitmap = new(
+                Convert.ToInt32(Math.Max(_imageSize().Width, Config.TRACK_WIDTH)),
+                Convert.ToInt32(Math.Max(_imageSize().Height, Config.TRACK_HEIGHT)),
                 Config.PIXELS_PER_DIP,
                 Config.PIXELS_PER_DIP,
                 PixelFormats.Pbgra32);
@@ -70,11 +69,11 @@ namespace Lab_4.ua.cdu.edu.service
 
         private void Render(DrawingContext drawingContext)
         {
-            double cameraPosition = horses[TargetHorse].Position.X + 2 * Config.HorseSize.Width / 3 - imageSize().Width / 2;
-            BackgroundView backgroundView = new BackgroundView(drawingContext, cameraPosition);
-            backgroundView.Render(backgrounds);
-            HorseView horseView = new HorseView(drawingContext, cameraPosition);
-            horseView.Render(horses);
+            double cameraPosition = _horses[TargetHorse].Position.X + 2 * Config.HorseSize.Width / 3 - _imageSize().Width / 2;
+            BackgroundView backgroundView = new(drawingContext, cameraPosition);
+            backgroundView.Render(_backgrounds);
+            HorseView horseView = new(drawingContext, cameraPosition);
+            horseView.Render(_horses);
         }
     }
 }
