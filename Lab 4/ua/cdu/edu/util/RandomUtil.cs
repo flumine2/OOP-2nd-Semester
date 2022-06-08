@@ -3,8 +3,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
 
 namespace Lab_4.ua.cdu.edu.util
@@ -12,7 +10,7 @@ namespace Lab_4.ua.cdu.edu.util
     public static class RandomUtil
     {
         private static Random RANDOM = new Random();
-        private static readonly string[] NAMES = 
+        private static readonly string[] NAMES =
         {
             "Lola", "Maks", "Jane", "Apple", "Mila", "John", "Victor", "Chance",
             "Bella", "Alex", "Lilly", "Alexia", "Fancy", "Sugar", "Lady", "Tucker",
@@ -20,7 +18,7 @@ namespace Lab_4.ua.cdu.edu.util
             "Blue", "Molly", "Ginger", "Gypsy", "Charlie", "Ranger", "Star", "Willow", "Lacey"
         };
 
-        public static int nextInt(int min, int max) 
+        public static int nextInt(int min, int max)
         {
             return RANDOM.Next(min, max);
         }
@@ -59,10 +57,10 @@ namespace Lab_4.ua.cdu.edu.util
                 );
         }
 
-        private static string nextName(ISet<string> usedNames) 
+        private static string nextName(ISet<string> usedNames)
         {
             string generatedName = NAMES[nextInt(0, NAMES.Length - 1)];
-            while (!usedNames.Add(generatedName)) 
+            while (!usedNames.Add(generatedName))
             {
                 generatedName = NAMES[nextInt(0, NAMES.Length - 1)];
             }

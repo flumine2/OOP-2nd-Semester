@@ -1,16 +1,12 @@
-﻿using System;
+﻿using Lab_4.ua.cdu.edu.model;
+using Lab_4.ua.cdu.edu.view;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 using System.Windows;
-using Lab_4.ua.cdu.edu.model;
-using Lab_4.ua.cdu.edu.view;
-using Lab_4.ua.cdu.edu.service.animation;
-using System.Windows.Threading;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Lab_4.ua.cdu.edu.service
 {
@@ -44,7 +40,7 @@ namespace Lab_4.ua.cdu.edu.service
         }
 
         private List<Background> GenerateBackgrounds()
-        { 
+        {
             Background[] backgrounds = new Background[(int)Math.Ceiling(Config.TRACK_LENGTH / Config.BackgroundSize.Width) + 2];
             return backgrounds.Select((x, index) => new Background((int)Config.BackgroundSize.Width * index)).ToList();
         }

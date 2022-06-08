@@ -5,9 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace Lab_4.ua.cdu.edu.service
 {
@@ -32,13 +29,13 @@ namespace Lab_4.ua.cdu.edu.service
             setCoefficients();
         }
 
-        private void setCoefficients() 
+        private void setCoefficients()
         {
             double maxSpeed = horses.Select(horse => horse.Speed).Max();
             horses.ForEach(horse => horse.Coefficient = nextCoefficient(horse.Speed, maxSpeed));
         }
 
-        private double nextCoefficient(double speed, double maxSpeed) 
+        private double nextCoefficient(double speed, double maxSpeed)
         {
             return Math.Max(3 * (maxSpeed - speed) + 1 + RandomUtil.nextDouble(-0.5, 0.5), Config.MIN_COEFFICIENT);
         }
@@ -46,15 +43,15 @@ namespace Lab_4.ua.cdu.edu.service
         public bool UpdateState()
         {
             bool raceOver = true;
-            foreach (Horse horse in horses) 
+            foreach (Horse horse in horses)
             {
-                if (!horse.Finished) 
+                if (!horse.Finished)
                 {
                     raceOver = false;
                     horse.UpdateState(TIMER.Elapsed);
                 }
             }
-            if (raceOver) 
+            if (raceOver)
             {
                 TIMER.Stop();
             }
@@ -62,7 +59,7 @@ namespace Lab_4.ua.cdu.edu.service
             return raceOver;
         }
 
-        public int NextHorse(int current) 
+        public int NextHorse(int current)
         {
             return (current + 1) % horses.Count;
         }
@@ -73,24 +70,24 @@ namespace Lab_4.ua.cdu.edu.service
             return previous < 0 ? horses.Count - 1 : previous % horses.Count;
         }
 
-        public void Reset() 
+        public void Reset()
         {
             TIMER.Reset();
             horses.ForEach(horse => horse.Reset());
         }
 
-        public void StartRace() 
+        public void StartRace()
         {
             TIMER.Start();
         }
 
-        public string Bet(Bet bet) 
+        public string Bet(Bet bet)
         {
-            horses[bet.HorseIndex].Bet += bet.Amount; 
+            horses[bet.HorseIndex].Bet += bet.Amount;
             return horses[bet.HorseIndex].Name;
         }
 
-        public Horse GetWinnerHorse() 
+        public Horse GetWinnerHorse()
         {
             return horses.Max();
         }

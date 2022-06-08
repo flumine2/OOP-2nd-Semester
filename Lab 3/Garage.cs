@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lab_3_Part_1
 {
@@ -23,7 +19,7 @@ namespace Lab_3_Part_1
 
         public void Add(string name, bool washed)
         {
-            cars.Add(new Car(name,washed));
+            cars.Add(new Car(name, washed));
         }
 
         public IEnumerator GetEnumerator()

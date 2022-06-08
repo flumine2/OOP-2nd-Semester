@@ -1,9 +1,7 @@
-﻿using System;
+﻿using LibraryFor2ndLab;
+using LibraryFor2ndLab.DTO;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LibraryFor2ndLab;
 
 namespace Lab_2.Utilities
 {
@@ -24,14 +22,14 @@ namespace Lab_2.Utilities
                 "New Services", "Pearl Services", "WhiteHat Services", "WallStreet Services", "Services Keys",
                 "Keystone Services", "Riddle Services", "Hexagon Services", "BlackOps Services", "Services Professional"};
 
-            List <Order> orders = new();
+            List<Order> orders = new();
 
             for (int i = 0; i < ordersCount; i++)
             {
                 orders.Add(OrderUtility.GetRandomOrderModel(random));
             }
 
-            return new(serviceDeskName[random.Next(0,serviceDeskName.Length)], orders);
+            return new(serviceDeskName[random.Next(0, serviceDeskName.Length)], orders);
         }
     }
 }

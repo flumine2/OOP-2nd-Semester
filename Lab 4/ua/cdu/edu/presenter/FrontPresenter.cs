@@ -3,13 +3,7 @@ using Lab_4.ua.cdu.edu.service;
 using Lab_4.ua.cdu.edu.view;
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Shapes;
 
 namespace Lab_4.ua.cdu.edu
 {
@@ -35,7 +29,7 @@ namespace Lab_4.ua.cdu.edu
             Init();
         }
 
-        private void Init() 
+        private void Init()
         {
             renderer.RenderFrame();
             betView.Render(betService.Balance);
@@ -43,9 +37,9 @@ namespace Lab_4.ua.cdu.edu
             startUpHorseView.RenderHorseSelection(horseService.Horses);
         }
 
-        public async void StartRace() 
+        public async void StartRace()
         {
-            if (!raceInProgress) 
+            if (!raceInProgress)
             {
                 horseService.StartRace();
                 raceInProgress = true;
@@ -76,19 +70,19 @@ namespace Lab_4.ua.cdu.edu
             }
         }
 
-        public void NextHorse() 
+        public void NextHorse()
         {
             renderer.TargetHorse = horseService.NextHorse(renderer.TargetHorse);
         }
 
-        public void PreviousHorse() 
+        public void PreviousHorse()
         {
             renderer.TargetHorse = horseService.PreviousHorse(renderer.TargetHorse);
         }
 
-        public void ProcessBet() 
+        public void ProcessBet()
         {
-            if (!raceInProgress) 
+            if (!raceInProgress)
             {
                 try
                 {

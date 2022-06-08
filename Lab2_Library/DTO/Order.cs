@@ -1,21 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
-namespace LibraryFor2ndLab
+namespace LibraryFor2ndLab.DTO
 {
     public class Order : ICloneable, IComparable<Order>
     {
+        [Required]
         private Performer performer;
+
+        [Required]
         private Customer customer;
+
+        [Required]
+        [DataType(DataType.Date)]
         private DateTime orderCreationTime;
+
+        [Required]
+        [Range(1, 100000)]
         private int price;
 
         public Performer Performer
         {
-            get => performer; 
+            get => performer;
             private set
             {
                 performer = value;
@@ -23,7 +29,7 @@ namespace LibraryFor2ndLab
         }
         public Customer Customer
         {
-            get => customer; 
+            get => customer;
             private set
             {
                 customer = value;
@@ -31,7 +37,7 @@ namespace LibraryFor2ndLab
         }
         public DateTime OrderCreationTime
         {
-            get => orderCreationTime; 
+            get => orderCreationTime;
             private set
             {
                 orderCreationTime = value;
@@ -40,7 +46,7 @@ namespace LibraryFor2ndLab
         }
         public int Price
         {
-            get => price; 
+            get => price;
             private set
             {
                 price = value;
@@ -55,9 +61,9 @@ namespace LibraryFor2ndLab
             this.price = price;
         }
 
-        public object Clone() => new Order(Performer.Clone() as Performer, 
-            Customer.Clone() as Customer, 
-            OrderCreationTime, 
+        public object Clone() => new Order(Performer.Clone() as Performer,
+            Customer.Clone() as Customer,
+            OrderCreationTime,
             Price);
 
         public int CompareTo(Order other)
@@ -91,7 +97,7 @@ namespace LibraryFor2ndLab
             {
                 return false;
             }
-            return Performer.Equals(order.Performer) && 
+            return Performer.Equals(order.Performer) &&
                 Customer.Equals(order.Customer) &&
                 OrderCreationTime == order.OrderCreationTime &&
                 Price == order.Price;

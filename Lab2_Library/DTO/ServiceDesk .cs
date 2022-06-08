@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace LibraryFor2ndLab
+namespace LibraryFor2ndLab.DTO
 {
     public class ServiceDesk : ICloneable, IComparable
     {
+        [Required]
         private string deskName;
+
+        [Required]
         private List<Order> ordersList;
 
         public string DeskName

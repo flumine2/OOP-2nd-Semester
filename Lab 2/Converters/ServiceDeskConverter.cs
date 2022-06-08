@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Lab_2.dto;
+﻿using Lab_2.dto;
 using LibraryFor2ndLab;
+using LibraryFor2ndLab.DTO;
+using System.Linq;
 
 namespace Lab_2.Converters
 {
@@ -12,7 +9,7 @@ namespace Lab_2.Converters
     {
         public static ServiceDesk ConvertToModel(ServiceDeskDTO serviceDeskDTO)
         {
-            return new(serviceDeskDTO.DeskName, 
+            return new(serviceDeskDTO.DeskName,
                 serviceDeskDTO.ordersList.Select(x => OrderConverter.ConvertToModel(x)).ToList());
         }
 

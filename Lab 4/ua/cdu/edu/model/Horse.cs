@@ -1,16 +1,9 @@
 ﻿using Lab_4.ua.cdu.edu.model.bind;
-using Lab_4.ua.cdu.edu.service;
 using Lab_4.ua.cdu.edu.util;
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 
 namespace Lab_4.ua.cdu.edu.model
 {
@@ -29,7 +22,8 @@ namespace Lab_4.ua.cdu.edu.model
         public bool Finished { get; set; }
 
         private int bet;
-        public int Bet {
+        public int Bet
+        {
             get => bet;
             set
             {
@@ -46,7 +40,7 @@ namespace Lab_4.ua.cdu.edu.model
             Position = GetInitialPosition(startPosition);
         }
 
-        private Point GetInitialPosition(int startPosition) 
+        private Point GetInitialPosition(int startPosition)
         {
             return new Point(0, 160 + (startPosition - 1) * Config.HorseSize.Height / 2);
         }
@@ -76,7 +70,7 @@ namespace Lab_4.ua.cdu.edu.model
             return Speed * RandomUtil.nextDouble(0.7, 1.3);
         }
 
-        public void Reset() 
+        public void Reset()
         {
             Finished = false;
             Bet = 0;

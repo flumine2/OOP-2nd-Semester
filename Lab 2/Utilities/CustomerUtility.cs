@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LibraryFor2ndLab;
+﻿using LibraryFor2ndLab;
+using LibraryFor2ndLab.DTO;
+using LibraryFor2ndLab.Models;
+using System;
 
 namespace Lab_2.Utilities
 {
@@ -21,7 +19,7 @@ namespace Lab_2.Utilities
             "1100 12th St Mc Kees Rocks, Pennsylvania(PA)",
             "34555 W 85th Ter De Soto, Kansas(KS)"};
 
-            return new((Service) random.Next(0,5), adress[random.Next(0, adress.Length)]);
+            return new((Service)random.Next(0, 5), adress[random.Next(0, adress.Length)]);
         }
     }
 }

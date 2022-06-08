@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Lab_4.ua.cdu.edu.service
 {
     public delegate bool SchedulerTask();
     public class SchedulerExecutor
     {
-        public static async Task schedule(SchedulerTask task, int delay) 
+        public static async Task schedule(SchedulerTask task, int delay)
         {
             while (!task())
             {

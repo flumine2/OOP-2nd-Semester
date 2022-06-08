@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LibraryFor2ndLab
+{
+    public abstract class Entity
+    {
+        private static long _id_counter;
+
+        protected Entity()
+        {
+            Id = _id_counter++;
+        }
+
+        protected Entity(long id)
+        {
+            Id = id;
+        }
+
+        [Required]
+        public long Id { get; private set; }
+    }
+}

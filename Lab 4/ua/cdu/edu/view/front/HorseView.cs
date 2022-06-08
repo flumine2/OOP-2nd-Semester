@@ -1,10 +1,7 @@
 ﻿using Lab_4.ua.cdu.edu.model;
 using Lab_4.ua.cdu.edu.service.animation;
-
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -46,12 +43,12 @@ namespace Lab_4.ua.cdu.edu.view
             );
         }
 
-        public void RenderHorseInfo(List<Horse> horses) 
+        public void RenderHorseInfo(List<Horse> horses)
         {
             horseInfo.ItemsSource = horses;
         }
 
-        public void RenderHorseSelection(List<Horse> horses) 
+        public void RenderHorseSelection(List<Horse> horses)
         {
             horseSelection.ItemsSource = horses
                 .Select(horse => GenerateHorseChoseBoxItem(horse))

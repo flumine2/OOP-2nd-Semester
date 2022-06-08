@@ -1,11 +1,8 @@
 ﻿using Lab_3.DivideTask;
-using Lab_3_Part_1.SumOfAPTask;
 using Lab_3.TimerTask;
+using Lab_3_Part_1.SumOfAPTask;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lab_3_Part_1
 {

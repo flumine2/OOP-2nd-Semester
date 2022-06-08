@@ -1,13 +1,9 @@
 ﻿using Lab_4.ua.cdu.edu.model;
-using Lab_4.ua.cdu.edu.service;
 
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -18,7 +14,7 @@ namespace Lab_4.ua.cdu.edu.service.animation
         public static HorseAnimationService Instance { get; } = new();
         private Dictionary<Color, List<ImageSource>> animationCache = new Dictionary<Color, List<ImageSource>>();
 
-        static HorseAnimationService() 
+        static HorseAnimationService()
         {
             Directory.SetCurrentDirectory("..");
             Directory.SetCurrentDirectory("..");
@@ -30,7 +26,7 @@ namespace Lab_4.ua.cdu.edu.service.animation
 
         public List<ImageSource> animate(Horse item)
         {
-            if (animationCache.ContainsKey(item.Color)) 
+            if (animationCache.ContainsKey(item.Color))
             {
                 return animationCache[item.Color];
             }
@@ -44,7 +40,7 @@ namespace Lab_4.ua.cdu.edu.service.animation
         {
             List<BitmapImage> bitmap_image_list = ReadImageList("Resources/Horses");
             List<BitmapImage> mask_image_list = ReadImageList("Resources/HorsesMask");
-            
+
             return bitmap_image_list.Select((item, index) => GetImageInColor(item, mask_image_list[index], color)).ToList();
         }
 

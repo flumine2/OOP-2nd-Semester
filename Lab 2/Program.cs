@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Lab_2.Converters;
+﻿using Lab_2.Converters;
 using Lab_2.dto;
 using Lab_2.Utilities;
 using LibraryFor2ndLab;
+using LibraryFor2ndLab.DTO;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace Lab_2
 {
