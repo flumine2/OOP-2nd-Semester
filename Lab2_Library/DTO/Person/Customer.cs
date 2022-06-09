@@ -54,7 +54,7 @@ namespace LibraryFor2ndLab.DTO
             _user = user;
         }
 
-        public object Clone() => new Customer(Service, Adress, User);
+        public object Clone() => new Customer(Id, Service, Adress, User);
 
         public int CompareTo(Customer other)
         {
@@ -89,7 +89,7 @@ namespace LibraryFor2ndLab.DTO
 
         public override string ToString()
         {
-            return $"Service: {Service}; Adress: {Adress}; ";
+            return $"Id: {Id}; Service: {Service}; Adress: {Adress}; ";
         }
     }
 }

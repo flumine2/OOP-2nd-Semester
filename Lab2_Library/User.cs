@@ -50,6 +50,7 @@ namespace LibraryFor2ndLab
             _email = email;
             _phone = phone;
             _password = password;
+            Role = Role.None;
         }
 
         public User(long id, string username, string email, string phone, string password, Role role) : base(id)

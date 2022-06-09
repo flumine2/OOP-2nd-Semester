@@ -4,21 +4,17 @@ namespace Lab_2.dto
 {
     class ServiceDeskDTO
     {
+        public long Id;
         public string DeskName;
-        public List<OrderDTO> ordersList;
+        public List<OrderDTO> OrdersList;
 
         public ServiceDeskDTO() { }
 
-        public ServiceDeskDTO(string deskName)
+        public ServiceDeskDTO(long id, string deskName, List<OrderDTO> ordersList)
         {
+            Id = id;
             DeskName = deskName;
-            ordersList = new List<OrderDTO>();
-        }
-
-        public ServiceDeskDTO(string deskName, List<OrderDTO> ordersList)
-        {
-            DeskName = deskName;
-            this.ordersList = ordersList;
+            OrdersList = ordersList;
         }
     }
 }

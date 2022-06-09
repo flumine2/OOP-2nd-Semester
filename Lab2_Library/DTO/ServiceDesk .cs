@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace LibraryFor2ndLab.DTO
 {
-    public class ServiceDesk : ICloneable, IComparable
+    public class ServiceDesk : Entity, ICloneable, IComparable
     {
         [Required]
         private string deskName;
@@ -27,13 +27,13 @@ namespace LibraryFor2ndLab.DTO
             private set { ordersList = value; }
         }
 
-        public ServiceDesk(string deskName)
+        public ServiceDesk(string deskName) : base()
         {
             DeskName = deskName;
             OrdersList = new List<Order>();
         }
 
-        public ServiceDesk(string deskName, List<Order> ordersList)
+        public ServiceDesk(long id, string deskName, List<Order> ordersList) : base(id)
         {
             DeskName = deskName;
             this.OrdersList = ordersList;
@@ -44,7 +44,7 @@ namespace LibraryFor2ndLab.DTO
             OrdersList.Add(order);
         }
 
-        public object Clone() => new ServiceDesk(DeskName, OrdersList.Select(x => x.Clone() as Order).ToList());
+        public object Clone() => new ServiceDesk(Id ,DeskName, OrdersList.Select(x => x.Clone() as Order).ToList());
 
         public int CompareTo(object obj)
         {
@@ -79,7 +79,7 @@ namespace LibraryFor2ndLab.DTO
 
         public override string ToString()
         {
-            string str = $"Service desk name: {DeskName};" + "\n" + "Orders:" + "\n";
+            string str = $"Id: {Id};" + "\n" + "Service desk name: {DeskName};" + "\n" + "Orders:" + "\n";
             for (int i = 0; i < OrdersList.Count; i++)
             {
                 str += OrdersList[i].ToString();

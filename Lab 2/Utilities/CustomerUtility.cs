@@ -7,9 +7,7 @@ namespace Lab_2.Utilities
 {
     class CustomerUtility
     {
-        public static Customer GetRandomCustomerModel(Random random)
-        {
-            string[] adress = new string[] {"692 NW 22nd Ln Okeechobee, Florida(FL)",
+        private static readonly string[] adress = new string[] {"692 NW 22nd Ln Okeechobee, Florida(FL)",
             "3961 Laurel Run Columbia, Pennsylvania(PA)",
             "1108 Park Ave #1R Hoboken, New Jersey(NJ)",
             "6 Sauls Ct Okatie, South Carolina(SC)",
@@ -19,7 +17,11 @@ namespace Lab_2.Utilities
             "1100 12th St Mc Kees Rocks, Pennsylvania(PA)",
             "34555 W 85th Ter De Soto, Kansas(KS)"};
 
-            return new((Service)random.Next(0, 5), adress[random.Next(0, adress.Length)]);
+        public static Customer GetRandomCustomerModel(Random random)
+        {
+            User user = UserUtility.GetRandomUserModel(random);
+
+            return new((Service)random.Next(0, 5), adress[random.Next(0, adress.Length)], user);
         }
     }
 }

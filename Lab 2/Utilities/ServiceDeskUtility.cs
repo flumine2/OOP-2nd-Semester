@@ -1,5 +1,4 @@
-﻿using LibraryFor2ndLab;
-using LibraryFor2ndLab.DTO;
+﻿using LibraryFor2ndLab.DTO;
 using System;
 using System.Collections.Generic;
 
@@ -7,9 +6,7 @@ namespace Lab_2.Utilities
 {
     class ServiceDeskUtility
     {
-        public static ServiceDesk GetRandomServiceDeskModel(int ordersCount, Random random)
-        {
-            string[] serviceDeskName = new string[] {"Services", "Services Fx", "Legends Services", "Services Brain", "Services Lifetime",
+        private static readonly string[] serviceDeskNames = new string[] {"Services", "Services Fx", "Legends Services", "Services Brain", "Services Lifetime",
                 "Scorpio Services", "Services Program", "BlueFire Services", "Homeland Services", "Services Bay",
                 "Services Hand", "Align Services", "Global Services", "Embassy Services", "Raw Services",
                 "Smart Services", "Services Platinum", "Graphic Services", "Ventura Services", "Services Runners",
@@ -22,6 +19,8 @@ namespace Lab_2.Utilities
                 "New Services", "Pearl Services", "WhiteHat Services", "WallStreet Services", "Services Keys",
                 "Keystone Services", "Riddle Services", "Hexagon Services", "BlackOps Services", "Services Professional"};
 
+        public static ServiceDesk GetRandomServiceDeskModel(int ordersCount, Random random)
+        {
             List<Order> orders = new();
 
             for (int i = 0; i < ordersCount; i++)
@@ -29,7 +28,14 @@ namespace Lab_2.Utilities
                 orders.Add(OrderUtility.GetRandomOrderModel(random));
             }
 
-            return new(serviceDeskName[random.Next(0, serviceDeskName.Length)], orders);
+            ServiceDesk serviceDesk = new(serviceDeskNames[random.Next(0, serviceDeskNames.Length)]);
+
+            foreach (Order order in orders)
+            {
+                serviceDesk.AddNewOrder(order);
+            }
+
+            return serviceDesk;
         }
     }
 }

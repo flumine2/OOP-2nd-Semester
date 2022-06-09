@@ -4,6 +4,7 @@ namespace Lab_2.dto
 {
     class ServiceDeskDTO
     {
+        public long Id;
         public string DeskName;
         public List<OrderDTO> ordersList;
 
@@ -15,8 +16,9 @@ namespace Lab_2.dto
             ordersList = new List<OrderDTO>();
         }
 
-        public ServiceDeskDTO(string deskName, List<OrderDTO> ordersList)
+        public ServiceDeskDTO(long id, string deskName, List<OrderDTO> ordersList)
         {
+            Id = id;
             DeskName = deskName;
             this.ordersList = ordersList;
         }

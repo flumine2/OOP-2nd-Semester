@@ -1,5 +1,4 @@
-﻿using LibraryFor2ndLab;
-using LibraryFor2ndLab.DTO;
+﻿using LibraryFor2ndLab.DTO;
 using System;
 using System.Collections.Generic;
 

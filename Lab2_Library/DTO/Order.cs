@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LibraryFor2ndLab.DTO
 {
-    public class Order : ICloneable, IComparable<Order>
+    public class Order : Entity, ICloneable, IComparable<Order>
     {
         [Required]
         private Performer performer;
@@ -53,7 +53,7 @@ namespace LibraryFor2ndLab.DTO
             }
         }
 
-        public Order(Performer performer, Customer customer, DateTime orderCreationTime, int price)
+        public Order(Performer performer, Customer customer, DateTime orderCreationTime, int price) : base()
         {
             this.performer = performer;
             this.customer = customer;
@@ -61,7 +61,17 @@ namespace LibraryFor2ndLab.DTO
             this.price = price;
         }
 
-        public object Clone() => new Order(Performer.Clone() as Performer,
+        public Order(long id, Performer performer, Customer customer, DateTime orderCreationTime, int price) : base(id)
+        {
+            this.performer = performer;
+            this.customer = customer;
+            this.orderCreationTime = orderCreationTime;
+            this.price = price;
+        }
+
+        public object Clone() => new Order(
+            Id, 
+            Performer.Clone() as Performer,
             Customer.Clone() as Customer,
             OrderCreationTime,
             Price);
@@ -110,7 +120,8 @@ namespace LibraryFor2ndLab.DTO
 
         public override string ToString()
         {
-            return $"Performer: {Performer}" + "\n" +
+            return $"Id: {Id};" + "\n" +
+                $"Performer: {Performer}" + "\n" +
                 $"Customer: {Customer}" + "\n" +
                 $"Creation time: {OrderCreationTime};" + "\n" +
                 $"Price: {Price};";

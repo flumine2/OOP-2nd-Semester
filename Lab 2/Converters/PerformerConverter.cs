@@ -1,5 +1,4 @@
 ﻿using Lab_2.dto;
-using LibraryFor2ndLab;
 using LibraryFor2ndLab.DTO;
 
 namespace Lab_2.Converters
@@ -8,13 +7,20 @@ namespace Lab_2.Converters
     {
         public static Performer ConvertToModel(PerformerDTO performerDTO)
         {
-            return new(performerDTO.Name, performerDTO.Surname, performerDTO.BirthDate);
+            return new(performerDTO.Id,
+                performerDTO.Name,
+                performerDTO.Surname,
+                performerDTO.BirthDate,
+                UserConverter.ConvertToModel(performerDTO.User));
         }
 
         public static PerformerDTO ConvertToDTO(Performer performer)
         {
-            return new(performer.Name, performer.Surname, performer.BirthDate);
+            return new(performer.Id,
+                performer.Name,
+                performer.Surname,
+                performer.BirthDate,
+                UserConverter.ConvertToDTO(performer.User));
         }
-
     }
 }

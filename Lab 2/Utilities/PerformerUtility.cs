@@ -6,9 +6,7 @@ namespace Lab_2.Utilities
 {
     class PerformerUtility
     {
-        public static Performer GetRandomPerformerModel(Random random)
-        {
-            string[] name = new string[] {"Adrianna", "Diggory", "Kathi", "Ruben", "Myra",
+        private static readonly string[] names = new string[] {"Adrianna", "Diggory", "Kathi", "Ruben", "Myra",
                  "Heorhiy", "Lyudmyla", "Vasylyna", "Sofron", "Trokhym",
                  "Lionors", "Andriy", "Tyberiy", "Nemo", "Ivan",
                  "Guiomar", "Nina", "Natali", "Yeva", "Arwen",
@@ -17,7 +15,7 @@ namespace Lab_2.Utilities
                  "Isolda", "Gandalf", "Candide", "Polikarp", "Figaro",
                  "Tariel", "Anton", "Lukyan", "Denys", "Jorah"};
 
-            string[] surname = new string[] { "Kohlberg", "Schoenbach", "Schiano", "Emory", "Urdang-brown",
+        private static readonly string[] surnames = new string[] { "Kohlberg", "Schoenbach", "Schiano", "Emory", "Urdang-brown",
                 "Miranda", "Lipponen", "Luntz", "Haines", "Kester",
                 "Knell", "Bloomfield", "Viggiani", "Beyer", "Dohrman",
                 "Endres", "Darlington", "Rando", "Nocella", "Maron",
@@ -27,13 +25,17 @@ namespace Lab_2.Utilities
                 "Chaput", "Gerraughty", "Blackmar", "Iriye", "Spurr",
                 "Devney", "Romaine", "Demarinis", "Merrithew", "Marzke",};
 
+        public static Performer GetRandomPerformerModel(Random random)
+        {
             int year = random.Next(1950, 2003);
             int month = random.Next(1, 13);
             int day = random.Next(1, 28);
 
-            return new(name[random.Next(0, name.Length)],
-                surname[random.Next(0, surname.Length)],
-                new DateTime(year, month, day));
+            User user = UserUtility.GetRandomUserModel(random);
+
+            return new(names[random.Next(0, names.Length)],
+                surnames[random.Next(0, surnames.Length)],
+                new DateTime(year, month, day), user);
         }
     }
 }

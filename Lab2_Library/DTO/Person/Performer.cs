@@ -80,7 +80,7 @@ namespace LibraryFor2ndLab.DTO
             _user = user;
         }
 
-        public object Clone() => new Performer(Name, Surname, BirthDate, User);
+        public object Clone() => new Performer(Id, Name, Surname, BirthDate, User);
 
         public int CompareTo(Performer other)
         {
@@ -122,7 +122,7 @@ namespace LibraryFor2ndLab.DTO
 
         public override string ToString()
         {
-            return $"Full name: {Name} {Surname}; \nBirth date: {BirthDate};";
+            return $"Id: {Id}; Full name: {Name} {Surname}; \nBirth date: {BirthDate};";
         }
     }
 }
