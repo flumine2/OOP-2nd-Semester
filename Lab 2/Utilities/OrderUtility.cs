@@ -7,8 +7,18 @@ namespace Lab_2.Utilities
     {
         public static Order GetRandomOrderModel(Random random)
         {
-            return new(PerformerUtility.GetRandomPerformerModel(random),
+            return new(
+                PerformerUtility.GetRandomPerformerModel(random),
                 CustomerUtility.GetRandomCustomerModel(random),
+                DateTime.Today,
+                random.Next(20, 1000));
+        }
+
+        public static Order GetRandomOrderModel(Random random, Customer customer, Performer performer)
+        {
+            return new(
+                performer,
+                customer,
                 DateTime.Today,
                 random.Next(20, 1000));
         }

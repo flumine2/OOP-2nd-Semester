@@ -1,29 +1,33 @@
-﻿using LibraryFor2ndLab.DTO;
+﻿using Lab_2.Converters;
+using Lab_2.DTO;
+using LibraryFor2ndLab.DTO;
+using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace Lab_2.Repository
 {
     class PerformerRepository : IRepository<Performer>
     {
-        private readonly List<Performer> _base;
-        private readonly UserRepository _userRepository;
+        private readonly Dictionary<long, Performer> _base;
 
-        public PerformerRepository(UserRepository userRepository)
+        public PerformerRepository()
         {
-            _userRepository = userRepository;
-            _base = new List<Performer>();
+            _base = new Dictionary<long, Performer>();
         }
 
         public void Add(Performer entity)
         {
-            _userRepository.Add(entity.User);
-            _base.Add(entity);
+            if (!_base.ContainsKey(entity.Id))
+            {
+                _base.Add(entity.Id, entity);
+            }
         }
 
         public Performer GetById(long id)
         {
-            Performer[] performers = _base.Where(x => x.Id == id).ToArray();
+            Performer[] performers = _base.Where(x => x.Key == id).Select(x => x.Value).ToArray();
             if (performers.Length > 0)
             {
                 return performers[0];
@@ -31,6 +35,28 @@ namespace Lab_2.Repository
             else
             {
                 return null;
+            }
+        }
+
+        public List<Performer> FindAllByUserId(long id)
+        {
+            return _base.Select(x => x.Value).Where(x => x.User.Id == id).ToList();
+        }
+
+        public void Serialise()
+        {
+            string jsonString = JsonConvert.SerializeObject(_base.Select(x => x.Value).Select(x => PerformerConverter.ConvertToDTO(x)).ToList());
+
+            File.WriteAllText("Performers.json", jsonString);
+        }
+
+        public void Deserialise()
+        {
+            List<PerformerDTO> deserialisedPerformer = JsonConvert.DeserializeObject<List<PerformerDTO>>(File.ReadAllText("Performers.json"));
+
+            foreach (Performer performer in deserialisedPerformer.Select(x => PerformerConverter.ConvertToModel(x)))
+            {
+                Add(performer);
             }
         }
     }

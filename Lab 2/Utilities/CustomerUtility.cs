@@ -23,5 +23,10 @@ namespace Lab_2.Utilities
 
             return new((Service)random.Next(0, 5), adress[random.Next(0, adress.Length)], user);
         }
+
+        public static Customer GetRandomCustomerModel(Random random, User user, Service service)
+        {
+            return new(service, adress[random.Next(0, adress.Length)], user);
+        }
     }
 }

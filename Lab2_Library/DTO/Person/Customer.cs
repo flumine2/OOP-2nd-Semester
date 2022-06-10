@@ -43,7 +43,7 @@ namespace LibraryFor2ndLab.DTO
             }
             else
             {
-                throw new ArgumentException("You can`t use this User like a Customer - it is Performer already");
+                throw new ArgumentException("You can`t use this alredy taken");
             }
         }
 

@@ -9,6 +9,9 @@ namespace LibraryFor2ndLab
 {
     public abstract class Entity
     {
+        [Required]
+        public long Id { get; private set; }
+
         private static long _id_counter;
 
         protected Entity()
@@ -20,8 +23,5 @@ namespace LibraryFor2ndLab
         {
             Id = id;
         }
-
-        [Required]
-        public long Id { get; private set; }
     }
 }

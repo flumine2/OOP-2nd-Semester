@@ -37,5 +37,18 @@ namespace Lab_2.Utilities
                 surnames[random.Next(0, surnames.Length)],
                 new DateTime(year, month, day), user);
         }
+
+        public static Performer GetRandomPerformerModel(Random random, User user)
+        {
+            int year = random.Next(1950, 2003);
+            int month = random.Next(1, 13);
+            int day = random.Next(1, 28);
+
+            return new(
+                names[random.Next(0, names.Length)],
+                surnames[random.Next(0, surnames.Length)],
+                new DateTime(year, month, day),
+                user);
+        }
     }
 }

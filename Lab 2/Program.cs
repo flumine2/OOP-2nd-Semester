@@ -1,6 +1,9 @@
 ﻿using Lab_2.Converters;
-using Lab_2.dto;
+using Lab_2.DTO;
+using Lab_2.Repository;
+using Lab_2.Tests;
 using Lab_2.Utilities;
+using LibraryFor2ndLab;
 using LibraryFor2ndLab.DTO;
 using Newtonsoft.Json;
 using System;
@@ -14,24 +17,21 @@ namespace Lab_2
     {
         static void Main()
         {
+            CustomTest.UserRepository.Deserialise();
+            CustomTest.CustomerRepository.Deserialise();
+            CustomTest.PerformerRepository.Deserialise();
+            CustomTest.OrderRepository.Deserialise();
+            CustomTest.ServiceDeskRepository.Deserialise();
+
             Random random = new();
-            List<ServiceDesk> desks = GenerateUtility.GetRandomServiceDeskModelsList(10, random);
-            foreach (var desk in desks)
-            {
-                //ServiceDeskRepository
-            }
 
-            string jsonString = JsonConvert.SerializeObject(desks.Select(x => ServiceDeskConverter.ConvertToDTO(x)).ToList());
+            CustomTest.TestData(random);
 
-            File.WriteAllText("SeviceDesks.json", jsonString);
-
-            var deserialisedDesks = JsonConvert.DeserializeObject<List<ServiceDeskDTO>>(File.ReadAllText("SeviceDesks.json"));
-
-            foreach (var item in deserialisedDesks.Select(x => ServiceDeskConverter.ConvertToModel(x)))
-            {
-                Console.WriteLine();
-                Console.WriteLine(item.ToShortString());
-            }
+            CustomTest.UserRepository.Serialise();
+            CustomTest.CustomerRepository.Serialise();
+            CustomTest.PerformerRepository.Serialise();
+            CustomTest.OrderRepository.Serialise();
+            CustomTest.ServiceDeskRepository.Serialise();
         }
     }
 }

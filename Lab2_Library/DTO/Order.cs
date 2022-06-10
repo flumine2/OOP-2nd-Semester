@@ -6,67 +6,67 @@ namespace LibraryFor2ndLab.DTO
     public class Order : Entity, ICloneable, IComparable<Order>
     {
         [Required]
-        private Performer performer;
+        private Performer _performer;
 
         [Required]
-        private Customer customer;
+        private Customer _customer;
 
         [Required]
         [DataType(DataType.Date)]
-        private DateTime orderCreationTime;
+        private DateTime _orderCreationTime;
 
         [Required]
         [Range(1, 100000)]
-        private int price;
+        private int _price;
 
         public Performer Performer
         {
-            get => performer;
+            get => _performer;
             private set
             {
-                performer = value;
+                _performer = value;
             }
         }
         public Customer Customer
         {
-            get => customer;
+            get => _customer;
             private set
             {
-                customer = value;
+                _customer = value;
             }
         }
         public DateTime OrderCreationTime
         {
-            get => orderCreationTime;
+            get => _orderCreationTime;
             private set
             {
-                orderCreationTime = value;
+                _orderCreationTime = value;
             }
 
         }
         public int Price
         {
-            get => price;
+            get => _price;
             private set
             {
-                price = value;
+                _price = value;
             }
         }
 
         public Order(Performer performer, Customer customer, DateTime orderCreationTime, int price) : base()
         {
-            this.performer = performer;
-            this.customer = customer;
-            this.orderCreationTime = orderCreationTime;
-            this.price = price;
+            _performer = performer;
+            _customer = customer;
+            _orderCreationTime = orderCreationTime;
+            _price = price;
         }
 
         public Order(long id, Performer performer, Customer customer, DateTime orderCreationTime, int price) : base(id)
         {
-            this.performer = performer;
-            this.customer = customer;
-            this.orderCreationTime = orderCreationTime;
-            this.price = price;
+            _performer = performer;
+            _customer = customer;
+            _orderCreationTime = orderCreationTime;
+            _price = price;
         }
 
         public object Clone() => new Order(

@@ -8,23 +8,23 @@ namespace LibraryFor2ndLab.DTO
     public class ServiceDesk : Entity, ICloneable, IComparable
     {
         [Required]
-        private string deskName;
+        private string _deskName;
 
         [Required]
-        private List<Order> ordersList;
+        private List<Order> _ordersList;
 
         public string DeskName
         {
-            get => deskName;
+            get => _deskName;
             private set
             {
-                deskName = value;
+                _deskName = value;
             }
         }
         public List<Order> OrdersList
         {
-            get => ordersList;
-            private set { ordersList = value; }
+            get => _ordersList;
+            private set { _ordersList = value; }
         }
 
         public ServiceDesk(string deskName) : base()
@@ -36,7 +36,7 @@ namespace LibraryFor2ndLab.DTO
         public ServiceDesk(long id, string deskName, List<Order> ordersList) : base(id)
         {
             DeskName = deskName;
-            this.OrdersList = ordersList;
+            OrdersList = ordersList;
         }
 
         public void AddNewOrder(Order order)
@@ -83,6 +83,7 @@ namespace LibraryFor2ndLab.DTO
             for (int i = 0; i < OrdersList.Count; i++)
             {
                 str += OrdersList[i].ToString();
+                str += "\n\n";
             }
             return str;
         }

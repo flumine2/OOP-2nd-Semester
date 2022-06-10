@@ -7,5 +7,7 @@ namespace Lab_2.Repository
         T GetById(long id);
         void Add(T entity);
 
+        void Serialise();
+        void Deserialise();
     }
 }

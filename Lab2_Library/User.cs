@@ -6,6 +6,7 @@ namespace LibraryFor2ndLab
 {
     public class User : Entity, ICloneable, IComparable<User>
     {
+        [Required]
         public Role Role;
 
         [Required]

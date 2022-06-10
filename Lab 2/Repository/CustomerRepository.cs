@@ -1,29 +1,34 @@
-﻿using LibraryFor2ndLab.DTO;
+﻿using Lab_2.Converters;
+using Lab_2.DTO;
+using LibraryFor2ndLab.DTO;
+using LibraryFor2ndLab.Models;
+using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace Lab_2.Repository
 {
     class CustomerRepository : IRepository<Customer>
     {
-        private readonly List<Customer> _base;
-        private readonly UserRepository _userRepository;
+        private readonly Dictionary<long, Customer> _base;
 
-        public CustomerRepository(UserRepository userRepository)
+        public CustomerRepository()
         {
-            _userRepository = userRepository;
-            _base = new List<Customer>();
+            _base = new Dictionary<long, Customer>();
         }
 
         public void Add(Customer entity)
         {
-            _userRepository.Add(entity.User);
-            _base.Add(entity);
+            if (!_base.ContainsKey(entity.Id))
+            {
+                _base.Add(entity.Id, entity);
+            }
         }
 
         public Customer GetById(long id)
         {
-            Customer[] customers = _base.Where(x => x.Id == id).ToArray();
+            Customer[] customers = _base.Where(x => x.Key == id).Select(x => x.Value).ToArray();
             if (customers.Length > 0)
             {
                 return customers[0];
@@ -31,6 +36,37 @@ namespace Lab_2.Repository
             else
             {
                 return null;
+            }
+        }
+
+        public List<Customer> FindAllByUserId(long id)
+        {
+            return _base.Select(x => x.Value).Where(x => x.User.Id == id).ToList(); 
+        }
+
+        public List<Customer> FindAllByService(Service service)
+        {
+            return _base.Select(x => x.Value).Where(x => x.Service == service).ToList();
+        }
+
+        public void Serialise()
+        {
+            string jsonString = JsonConvert
+                .SerializeObject(_base
+                .Select(x => x.Value)
+                .Select(x => CustomerConverter.ConvertToDTO(x))
+                .ToList());
+
+            File.WriteAllText("Customers.json", jsonString);
+        }
+
+        public void Deserialise()
+        {
+            List<CustomerDTO> deserialisedCustomers = JsonConvert.DeserializeObject<List<CustomerDTO>>(File.ReadAllText("Customers.json"));
+
+            foreach (Customer customer in deserialisedCustomers.Select(x => CustomerConverter.ConvertToModel(x)))
+            {
+                Add(customer);
             }
         }
     }

@@ -1,6 +1,6 @@
 ﻿using LibraryFor2ndLab.Models;
 
-namespace Lab_2.dto
+namespace Lab_2.DTO
 {
     class CustomerDTO
     {

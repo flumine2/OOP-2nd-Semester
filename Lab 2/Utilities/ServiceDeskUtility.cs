@@ -37,5 +37,17 @@ namespace Lab_2.Utilities
 
             return serviceDesk;
         }
+
+        public static ServiceDesk GetRandomServiceDeskModel(Random random, params Order[] orders)
+        {
+            ServiceDesk serviceDesk = new(serviceDeskNames[random.Next(0, serviceDeskNames.Length)]);
+
+            foreach (Order order in orders)
+            {
+                serviceDesk.AddNewOrder(order);
+            }
+
+            return serviceDesk;
+        }
     }
 }

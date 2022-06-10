@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Lab_2.dto
+namespace Lab_2.DTO
 {
     class ServiceDeskDTO
     {
