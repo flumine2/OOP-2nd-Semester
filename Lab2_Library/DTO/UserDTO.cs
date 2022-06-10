@@ -1,8 +1,8 @@
 ﻿using LibraryFor2ndLab.Models;
 
-namespace Lab_2.DTO
+namespace LibraryFor2ndLab.DTO
 {
-    class UserDTO
+    public class UserDTO
     {
         public long Id;
         public string Username;
@@ -10,6 +10,9 @@ namespace Lab_2.DTO
         public readonly string Email;
         public readonly string Phone;
         public Role Role;
+
+        public UserDTO() 
+        { }
 
         public UserDTO(long id, string username, string email, string phone, string password, Role role)
         {
@@ -20,5 +23,7 @@ namespace Lab_2.DTO
             Password = password;
             Role = role;
         }
+
+
     }
 }

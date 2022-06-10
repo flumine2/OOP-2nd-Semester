@@ -1,13 +1,13 @@
-﻿using Lab_2.DTO;
-using LibraryFor2ndLab.DTO;
+﻿using LibraryFor2ndLab.DTO;
+using LibraryFor2ndLab.Models;
 
-namespace Lab_2.Converters
+namespace LibraryFor2ndLab.Converters
 {
-    class OrderConverter
+    public class OrderConverter
     {
         public static Order ConvertToModel(OrderDTO orderDTO)
         {
-            return new(orderDTO.Id,
+            return new Order(orderDTO.Id,
                 PerformerConverter.ConvertToModel(orderDTO.Performer),
                 CustomerConverter.ConvertToModel(orderDTO.Customer),
                 orderDTO.OrderCreationTime,
@@ -16,7 +16,7 @@ namespace Lab_2.Converters
 
         public static OrderDTO ConvertToDTO(Order order)
         {
-            return new(order.Id,
+            return new OrderDTO(order.Id,
                 PerformerConverter.ConvertToDTO(order.Performer),
                 CustomerConverter.ConvertToDTO(order.Customer),
                 order.OrderCreationTime,

@@ -1,13 +1,13 @@
-﻿using Lab_2.DTO;
-using LibraryFor2ndLab.DTO;
+﻿using LibraryFor2ndLab.DTO;
+using LibraryFor2ndLab.Models.Person;
 
-namespace Lab_2.Converters
+namespace LibraryFor2ndLab.Converters
 {
-    class PerformerConverter
+    public class PerformerConverter
     {
         public static Performer ConvertToModel(PerformerDTO performerDTO)
         {
-            return new(performerDTO.Id,
+            return new Performer(performerDTO.Id,
                 performerDTO.Name,
                 performerDTO.Surname,
                 performerDTO.BirthDate,
@@ -16,7 +16,7 @@ namespace Lab_2.Converters
 
         public static PerformerDTO ConvertToDTO(Performer performer)
         {
-            return new(performer.Id,
+            return new PerformerDTO(performer.Id,
                 performer.Name,
                 performer.Surname,
                 performer.BirthDate,

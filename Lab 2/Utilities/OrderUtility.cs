@@ -1,4 +1,6 @@
 ﻿using LibraryFor2ndLab.DTO;
+using LibraryFor2ndLab.Models;
+using LibraryFor2ndLab.Models.Person;
 using System;
 
 namespace Lab_2.Utilities

@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Lab_2.DTO
+namespace LibraryFor2ndLab.DTO
 {
-    class PerformerDTO
+    public class PerformerDTO
     {
         public long Id;
         public string Name;

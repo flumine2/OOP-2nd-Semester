@@ -2,44 +2,18 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace LibraryFor2ndLab.DTO
+namespace LibraryFor2ndLab.Models.Person
 {
     public class Customer : Entity, ICloneable, IComparable<Customer>
     {
-        [Required]
-        private Service _service;
-
-        [Required]
-        [DataType(DataType.Text)]
-        private string _adress;
-
-        [Required]
-        private User _user;
-
-        public Service Service
-        {
-            get => _service;
-            private set { _service = value; }
-        }
-        public string Adress
-        {
-            get => _adress;
-            private set => _adress = value;
-        }
-        public User User
-        {
-            get => _user;
-            private set => _user = value;
-        }
-
         public Customer(Service service, string adress, User user) : base()
         {
-            _service = service;
-            _adress = adress;
-            _user = user;
-            if (_user.Role == Role.None)
+            Service = service;
+            Adress = adress;
+            User = user;
+            if (User.Role == Role.None)
             {
-                _user.Role = Role.Customer;
+                User.Role = Role.Customer;
             }
             else
             {
@@ -49,10 +23,20 @@ namespace LibraryFor2ndLab.DTO
 
         public Customer(long id, Service service, string adress, User user) : base(id)
         {
-            _service = service;
-            _adress = adress;
-            _user = user;
+            Service = service;
+            Adress = adress;
+            User = user;
         }
+
+        [Required]
+        public Service Service { get; private set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        public string Adress { get; private set; }
+
+        [Required]
+        public User User { get; private set; }
 
         public object Clone() => new Customer(Id, Service, Adress, User);
 
@@ -74,7 +58,7 @@ namespace LibraryFor2ndLab.DTO
             {
                 return false;
             }
-            return _service == customer.Service && _adress == customer.Adress;
+            return Service == customer.Service && Adress == customer.Adress;
         }
 
         public override int GetHashCode()

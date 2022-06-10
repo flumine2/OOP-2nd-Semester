@@ -1,14 +1,14 @@
-﻿using Lab_2.DTO;
-using LibraryFor2ndLab.DTO;
+﻿using LibraryFor2ndLab.DTO;
+using LibraryFor2ndLab.Models;
 using System.Linq;
 
-namespace Lab_2.Converters
+namespace LibraryFor2ndLab.Converters
 {
-    class ServiceDeskConverter
+    public class ServiceDeskConverter
     {
         public static ServiceDesk ConvertToModel(ServiceDeskDTO serviceDeskDTO)
         {
-            return new(serviceDeskDTO.Id,
+            return new ServiceDesk(serviceDeskDTO.Id,
                 serviceDeskDTO.DeskName,
                 serviceDeskDTO.OrdersList
                 .Select(x => OrderConverter.ConvertToModel(x))
@@ -17,7 +17,7 @@ namespace Lab_2.Converters
 
         public static ServiceDeskDTO ConvertToDTO(ServiceDesk serviceDesk)
         {
-            return new(serviceDesk.Id,
+            return new ServiceDeskDTO(serviceDesk.Id,
                 serviceDesk.DeskName,
                 serviceDesk.OrdersList
                 .Select(x => OrderConverter.ConvertToDTO(x))

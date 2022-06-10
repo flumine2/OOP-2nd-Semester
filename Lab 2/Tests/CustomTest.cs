@@ -3,6 +3,7 @@ using Lab_2.Utilities;
 using LibraryFor2ndLab;
 using LibraryFor2ndLab.DTO;
 using LibraryFor2ndLab.Models;
+using LibraryFor2ndLab.Models.Person;
 using System;
 using System.Collections.Generic;
 using System.Linq;

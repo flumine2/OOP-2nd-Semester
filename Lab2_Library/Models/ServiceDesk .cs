@@ -3,30 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-namespace LibraryFor2ndLab.DTO
+namespace LibraryFor2ndLab.Models
 {
     public class ServiceDesk : Entity, ICloneable, IComparable
     {
-        [Required]
-        private string _deskName;
-
-        [Required]
-        private List<Order> _ordersList;
-
-        public string DeskName
-        {
-            get => _deskName;
-            private set
-            {
-                _deskName = value;
-            }
-        }
-        public List<Order> OrdersList
-        {
-            get => _ordersList;
-            private set { _ordersList = value; }
-        }
-
         public ServiceDesk(string deskName) : base()
         {
             DeskName = deskName;
@@ -38,6 +18,12 @@ namespace LibraryFor2ndLab.DTO
             DeskName = deskName;
             OrdersList = ordersList;
         }
+
+        [Required]
+        public string DeskName { get; private set; }
+
+        [Required]
+        public List<Order> OrdersList { get; private set; }
 
         public void AddNewOrder(Order order)
         {

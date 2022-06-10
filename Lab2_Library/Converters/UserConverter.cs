@@ -1,13 +1,13 @@
-﻿using Lab_2.DTO;
-using LibraryFor2ndLab;
+﻿using LibraryFor2ndLab.DTO;
+using LibraryFor2ndLab.Models.Person;
 
-namespace Lab_2.Converters
+namespace LibraryFor2ndLab.Converters
 {
-    class UserConverter
+    public class UserConverter
     {
         public static User ConvertToModel(UserDTO userDTO)
         {
-            return new(userDTO.Id,
+            return new User(userDTO.Id,
                 userDTO.Username,
                 userDTO.Email,
                 userDTO.Phone,
@@ -17,7 +17,7 @@ namespace Lab_2.Converters
 
         public static UserDTO ConvertToDTO(User user)
         {
-            return new(user.Id,
+            return new UserDTO(user.Id,
                 user.Username,
                 user.Email,
                 user.Phone,

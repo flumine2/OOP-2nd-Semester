@@ -1,6 +1,6 @@
-﻿using Lab_2.Converters;
-using Lab_2.DTO;
+﻿using LibraryFor2ndLab.Converters;
 using LibraryFor2ndLab.DTO;
+using LibraryFor2ndLab.Models.Person;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
@@ -15,6 +15,11 @@ namespace Lab_2.Repository
         public PerformerRepository()
         {
             _base = new Dictionary<long, Performer>();
+        }
+
+        public int Count
+        {
+            get => _base.Count;
         }
 
         public void Add(Performer entity)
@@ -38,9 +43,9 @@ namespace Lab_2.Repository
             }
         }
 
-        public List<Performer> FindAllByUserId(long id)
+        public Performer FindByUserId(long id)
         {
-            return _base.Select(x => x.Value).Where(x => x.User.Id == id).ToList();
+            return _base.Select(x => x.Value).Where(x => x.User.Id == id).First();
         }
 
         public void Serialise()

@@ -1,8 +1,8 @@
 ﻿using LibraryFor2ndLab.Models;
 
-namespace Lab_2.DTO
+namespace LibraryFor2ndLab.DTO
 {
-    class CustomerDTO
+    public class CustomerDTO
     {
         public long Id;
         public Service Service;

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Lab_2.DTO
+namespace LibraryFor2ndLab.DTO
 {
-    class ServiceDeskDTO
+    public class ServiceDeskDTO
     {
         public long Id;
         public string DeskName;

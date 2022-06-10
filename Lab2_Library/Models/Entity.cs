@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryFor2ndLab
+namespace LibraryFor2ndLab.Models
 {
     public abstract class Entity
     {

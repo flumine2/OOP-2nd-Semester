@@ -1,73 +1,40 @@
-﻿using System;
+﻿using LibraryFor2ndLab.Models.Person;
+using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace LibraryFor2ndLab.DTO
+namespace LibraryFor2ndLab.Models
 {
     public class Order : Entity, ICloneable, IComparable<Order>
     {
-        [Required]
-        private Performer _performer;
-
-        [Required]
-        private Customer _customer;
-
-        [Required]
-        [DataType(DataType.Date)]
-        private DateTime _orderCreationTime;
-
-        [Required]
-        [Range(1, 100000)]
-        private int _price;
-
-        public Performer Performer
-        {
-            get => _performer;
-            private set
-            {
-                _performer = value;
-            }
-        }
-        public Customer Customer
-        {
-            get => _customer;
-            private set
-            {
-                _customer = value;
-            }
-        }
-        public DateTime OrderCreationTime
-        {
-            get => _orderCreationTime;
-            private set
-            {
-                _orderCreationTime = value;
-            }
-
-        }
-        public int Price
-        {
-            get => _price;
-            private set
-            {
-                _price = value;
-            }
-        }
-
         public Order(Performer performer, Customer customer, DateTime orderCreationTime, int price) : base()
         {
-            _performer = performer;
-            _customer = customer;
-            _orderCreationTime = orderCreationTime;
-            _price = price;
+            Performer = performer;
+            Customer = customer;
+            OrderCreationTime = orderCreationTime;
+            Price = price;
         }
 
         public Order(long id, Performer performer, Customer customer, DateTime orderCreationTime, int price) : base(id)
         {
-            _performer = performer;
-            _customer = customer;
-            _orderCreationTime = orderCreationTime;
-            _price = price;
+            Performer = performer;
+            Customer = customer;
+            OrderCreationTime = orderCreationTime;
+            Price = price;
         }
+
+        [Required]
+        public Performer Performer { get; private set; }
+
+        [Required]
+        public Customer Customer { get; private set; }
+
+        [Required]
+        [DataType(DataType.DateTime)]
+        public DateTime OrderCreationTime { get; private set; }
+
+        [Required]
+        [Range(1, 100000)]
+        public int Price { get; private set; }
 
         public object Clone() => new Order(
             Id, 

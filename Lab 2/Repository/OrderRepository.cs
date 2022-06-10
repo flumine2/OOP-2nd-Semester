@@ -1,5 +1,4 @@
-﻿using Lab_2.Converters;
-using Lab_2.DTO;
+﻿using LibraryFor2ndLab.Converters;
 using LibraryFor2ndLab.DTO;
 using LibraryFor2ndLab.Models;
 using Newtonsoft.Json;
@@ -16,6 +15,11 @@ namespace Lab_2.Repository
         public OrderRepository()
         {
             _base = new Dictionary<long, Order>();
+        }
+
+        public int Count
+        {
+            get => _base.Count;
         }
 
         public void Add(Order entity)

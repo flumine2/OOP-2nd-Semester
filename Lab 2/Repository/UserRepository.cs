@@ -1,8 +1,7 @@
-﻿using Lab_2.Converters;
-using Lab_2.DTO;
-using LibraryFor2ndLab;
+﻿using LibraryFor2ndLab.Converters;
 using LibraryFor2ndLab.DTO;
 using LibraryFor2ndLab.Models;
+using LibraryFor2ndLab.Models.Person;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -18,6 +17,11 @@ namespace Lab_2.Repository
         public UserRepository()
         {
             _base = new Dictionary<long, User>();
+        }
+
+        public int Count
+        {
+            get => _base.Count;
         }
 
         public void Add(User entity)

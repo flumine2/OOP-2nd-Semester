@@ -1,10 +1,8 @@
-﻿using Lab_2.Converters;
-using Lab_2.DTO;
-using Lab_2.Repository;
+﻿using Lab_2.Repository;
 using Lab_2.Tests;
 using Lab_2.Utilities;
 using LibraryFor2ndLab;
-using LibraryFor2ndLab.DTO;
+using LibraryFor2ndLab.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,21 +15,22 @@ namespace Lab_2
     {
         static void Main()
         {
-            CustomTest.UserRepository.Deserialise();
-            CustomTest.CustomerRepository.Deserialise();
-            CustomTest.PerformerRepository.Deserialise();
-            CustomTest.OrderRepository.Deserialise();
-            CustomTest.ServiceDeskRepository.Deserialise();
+            //CustomTest.UserRepository.Deserialise();
+            //CustomTest.CustomerRepository.Deserialise();
+            //CustomTest.PerformerRepository.Deserialise();
+            //CustomTest.OrderRepository.Deserialise();
+            //CustomTest.ServiceDeskRepository.Deserialise();
 
-            Random random = new();
+            RepositoryControler repository = new();
+            InputUtil input = new(repository);
+            input.ProcessInput();
+            input.PrintInfoAboutModelRelatives();
 
-            CustomTest.TestData(random);
-
-            CustomTest.UserRepository.Serialise();
-            CustomTest.CustomerRepository.Serialise();
-            CustomTest.PerformerRepository.Serialise();
-            CustomTest.OrderRepository.Serialise();
-            CustomTest.ServiceDeskRepository.Serialise();
+            //CustomTest.UserRepository.Serialise();
+            //CustomTest.CustomerRepository.Serialise();
+            //CustomTest.PerformerRepository.Serialise();
+            //CustomTest.OrderRepository.Serialise();
+            //CustomTest.ServiceDeskRepository.Serialise();
         }
     }
 }

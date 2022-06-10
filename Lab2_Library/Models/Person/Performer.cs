@@ -2,69 +2,19 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace LibraryFor2ndLab.DTO
+namespace LibraryFor2ndLab.Models.Person
 {
     public class Performer : Entity, ICloneable, IComparable<Performer>
     {
-        [Required]
-        [StringLength(30)]
-        [DataType(DataType.Text)]
-        private string _name;
-
-        [Required]
-        [StringLength(30)]
-        [DataType(DataType.Text)]
-        private string _surname;
-
-        [Required]
-        [DataType(DataType.Date)]
-        private DateTime _birthDate;
-
-        [Required]
-        private User _user;
-
-        public string Name
-        {
-            get => _name;
-            private set
-            {
-                _name = value;
-            }
-        }
-        public string Surname
-        {
-            get => _surname;
-            private set
-            {
-                _surname = value;
-            }
-        }
-        public DateTime BirthDate
-        {
-            get => _birthDate;
-            private set
-            {
-                _birthDate = value;
-            }
-        }
-        public User User
-        {
-            get => _user;
-            private set
-            {
-                _user = value;
-            }
-        }
-
         public Performer(string name, string surname, DateTime birthDate, User user) : base()
         {
-            _name = name;
-            _surname = surname;
-            _birthDate = birthDate;
-            _user = user;
-            if (_user.Role == Role.None)
+            Name = name;
+            Surname = surname;
+            BirthDate = birthDate;
+            User = user;
+            if (User.Role == Role.None)
             {
-                _user.Role = Role.Performer;
+                User.Role = Role.Performer;
             }
             else
             {
@@ -74,11 +24,28 @@ namespace LibraryFor2ndLab.DTO
 
         public Performer(long id, string name, string surname, DateTime birthDate, User user) : base(id)
         {
-            _name = name;
-            _surname = surname;
-            _birthDate = birthDate;
-            _user = user;
+            Name = name;
+            Surname = surname;
+            BirthDate = birthDate;
+            User = user;
         }
+
+        [Required]
+        [StringLength(30)]
+        [DataType(DataType.Text)]
+        public string Name { get; private set; }
+
+        [Required]
+        [StringLength(30)]
+        [DataType(DataType.Text)]
+        public string Surname { get; private set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime BirthDate { get; private set; }
+
+        [Required]
+        public User User { get; private set; }
 
         public object Clone() => new Performer(Id, Name, Surname, BirthDate, User);
 

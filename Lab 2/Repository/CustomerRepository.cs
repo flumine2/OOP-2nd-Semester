@@ -1,7 +1,7 @@
-﻿using Lab_2.Converters;
-using Lab_2.DTO;
+﻿using LibraryFor2ndLab.Converters;
 using LibraryFor2ndLab.DTO;
 using LibraryFor2ndLab.Models;
+using LibraryFor2ndLab.Models.Person;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
@@ -16,6 +16,11 @@ namespace Lab_2.Repository
         public CustomerRepository()
         {
             _base = new Dictionary<long, Customer>();
+        }
+
+        public int Count
+        {
+            get => _base.Count;
         }
 
         public void Add(Customer entity)
@@ -39,9 +44,9 @@ namespace Lab_2.Repository
             }
         }
 
-        public List<Customer> FindAllByUserId(long id)
+        public Customer FindByUserId(long id)
         {
-            return _base.Select(x => x.Value).Where(x => x.User.Id == id).ToList(); 
+            return _base.Select(x => x.Value).Where(x => x.User.Id == id).First(); 
         }
 
         public List<Customer> FindAllByService(Service service)
