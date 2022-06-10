@@ -1,5 +1,4 @@
-﻿using LibraryFor2ndLab;
-using LibraryFor2ndLab.Models;
+﻿using LibraryFor2ndLab.Models;
 
 namespace Lab_2.Repository
 {

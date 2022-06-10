@@ -1,14 +1,9 @@
-﻿using LibraryFor2ndLab.DTO;
+﻿using Lab_2.Repository;
+using LibraryFor2ndLab.Models;
+using LibraryFor2ndLab.Models.Person;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-using LibraryFor2ndLab.Models.Person;
-using LibraryFor2ndLab.Converters;
-using Lab_2.Repository;
-using LibraryFor2ndLab.Models;
 
 namespace Lab_2
 {

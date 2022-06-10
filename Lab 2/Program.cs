@@ -1,13 +1,4 @@
 ﻿using Lab_2.Repository;
-using Lab_2.Tests;
-using Lab_2.Utilities;
-using LibraryFor2ndLab;
-using LibraryFor2ndLab.Models;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 
 namespace Lab_2
 {

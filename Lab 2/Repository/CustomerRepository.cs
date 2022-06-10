@@ -46,7 +46,7 @@ namespace Lab_2.Repository
 
         public Customer FindByUserId(long id)
         {
-            return _base.Select(x => x.Value).Where(x => x.User.Id == id).First(); 
+            return _base.Select(x => x.Value).Where(x => x.User.Id == id).First();
         }
 
         public List<Customer> FindAllByService(Service service)
