@@ -45,7 +45,11 @@ namespace Lab_2.Repository
 
         public Performer FindByUserId(long id)
         {
-            return _base.Select(x => x.Value).Where(x => x.User.Id == id).First();
+            if (_base.Count > 0)
+            {
+                return _base.Select(x => x.Value).Where(x => x.User.Id == id).First();
+            }
+            return null;
         }
 
         public void Serialise()

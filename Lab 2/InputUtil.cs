@@ -20,26 +20,34 @@ namespace Lab_2
         {
             Console.WriteLine("To sign up user - input '/create_user' and press Enter, otherwise press Enter only");
             string input = Console.ReadLine();
-            while (input is "/create_user")
+            if (input is "/create_user")
             {
                 CreateUser();
-                Console.WriteLine("To sign up user as customer - input '/create_customer' and press Enter." + "\n" +
-                    "To sign up user as performer - input '/create_performer' and press Enter." + "\n" +
-                    "To sign up another user - input '/create_user' and press Enter." + "\n" +
-                    "Otherwise press Enter only");
-                input = Console.ReadLine();
-                switch (input)
+                while (true)
                 {
-                    case "/create_customer":
-                        CreateCustomer();
-                        break;
-                    case "/create_performer":
-                        CreatePerformer();
-                        break;
-                    default:
-                        break;
+                    Console.WriteLine("To sign up user as customer - input '/create_customer' and press Enter." + "\n" +
+                        "To sign up user as performer - input '/create_performer' and press Enter." + "\n" +
+                        "To sign up another user - input '/create_user' and press Enter." + "\n" +
+                        "Otherwise press Enter only");
+                    input = Console.ReadLine();
+                    switch (input)
+                    {
+                        case "/create_customer":
+                            CreateCustomer();
+                            continue;
+                        case "/create_performer":
+                            CreatePerformer();
+                            continue;
+                        case "/create_user":
+                            CreateUser();
+                            continue;
+                        default:
+                            break;
+                    }
+                    break;
                 }
             }
+
 
             if (_repository.CustomerRepository.Count == 0)
             {
@@ -123,7 +131,7 @@ namespace Lab_2
                 }
 
                 _repository.ServiceDeskRepository.Add(serviceDesk);
-                Console.WriteLine($"Order(id: {serviceDesk.Id}) successfully created.");
+                Console.WriteLine($"Service desk(id: {serviceDesk.Id}) successfully created.");
             }
             catch (Exception e)
             {
@@ -156,10 +164,18 @@ namespace Lab_2
                 Console.WriteLine("Input customer id:");
                 long customerId = long.Parse(Console.ReadLine());
                 Customer customer = _repository.CustomerRepository.GetById(customerId);
+                if (customer is null)
+                {
+                    throw new Exception("There is no customer with this id.");
+                }
 
                 Console.WriteLine("Input performer id:");
                 long performerId = long.Parse(Console.ReadLine());
                 Performer performer = _repository.PerformerRepository.GetById(performerId);
+                if (performer is null)
+                {
+                    throw new Exception("There is no performer with this id.");
+                }
 
                 Console.WriteLine("Input creating date and time:");
                 DateTime creationDateTime = DateTime.Parse(Console.ReadLine());
@@ -232,6 +248,10 @@ namespace Lab_2
                 Console.WriteLine("Input User Id:");
                 long userId = long.Parse(Console.ReadLine());
                 User user = _repository.UserRepository.GetById(userId);
+                if (user is null)
+                {
+                    throw new Exception("There is no user with this id.");
+                }
 
                 Customer customer = new(service, adress, user);
 
@@ -266,6 +286,10 @@ namespace Lab_2
                 Console.WriteLine("Input User Id:");
                 long userId = long.Parse(Console.ReadLine());
                 User user = _repository.UserRepository.GetById(userId);
+                if (user is null)
+                {
+                    throw new Exception("There is no user with this id.");
+                }
 
                 Performer performer = new(name, surname, birthdate, user);
 
@@ -290,26 +314,50 @@ namespace Lab_2
             try
             {
                 long userId = long.Parse(Console.ReadLine());
-                if (_repository.UserRepository.GetById(userId) is null)
+                User user = _repository.UserRepository.GetById(userId);
+                if (user is null)
                 {
                     throw new Exception("User not found.");
                 }
 
-                Entity entity = _repository.CustomerRepository.FindByUserId(userId);
+                Console.WriteLine("Model:");
+                Console.WriteLine(user);
 
-                if (!(entity is null))
+                Console.WriteLine("Relatives:");
+
+                Customer customer = _repository.CustomerRepository.FindByUserId(userId);
+                if (customer is null)
                 {
-                    entity = _repository.PerformerRepository.FindByUserId(userId);
+                    Performer performer = _repository.PerformerRepository.FindByUserId(userId);
+                    if (performer is null)
+                    {
+                        Console.WriteLine("There is no related customer or performer.");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Performer: {performer}");
+                    }
                 }
-                Console.WriteLine($"{typeof(Entity)}: " + entity);
+                else
+                {
+                    Console.WriteLine($"Customer: {customer}");
+                }
 
                 List<Order> orders = _repository.OrderRepository.FindAllByUserId(userId);
+                if (orders.Count == 0)
+                {
+                    Console.WriteLine("There is no this user related orders.");
+                }
                 foreach (Order order in orders)
                 {
                     Console.WriteLine(order);
                 }
 
                 List<ServiceDesk> serviceDesks = _repository.ServiceDeskRepository.FindAllByUserId(userId);
+                if (serviceDesks.Count == 0)
+                {
+                    Console.WriteLine("There is no this user related service desks.");
+                }
                 foreach (ServiceDesk serviceDesk in serviceDesks)
                 {
                     Console.WriteLine(serviceDesk);
@@ -327,18 +375,32 @@ namespace Lab_2
             try
             {
                 long customerId = long.Parse(Console.ReadLine());
-                if (_repository.CustomerRepository.GetById(customerId) is null)
+                Customer customer = _repository.CustomerRepository.GetById(customerId);
+                if (customer is null)
                 {
                     throw new Exception("Customer not found.");
                 }
 
+                Console.WriteLine("Model:");
+                Console.WriteLine(customer);
+
+                Console.WriteLine("Relatives:");
+
                 List<Order> orders = _repository.OrderRepository.FindAllByCustomerId(customerId);
+                if (orders.Count == 0)
+                {
+                    Console.WriteLine("There is no this customer related orders.");
+                }
                 foreach (Order order in orders)
                 {
                     Console.WriteLine(order);
                 }
 
                 List<ServiceDesk> serviceDesks = _repository.ServiceDeskRepository.FindAllByCustomerId(customerId);
+                if (serviceDesks.Count == 0)
+                {
+                    Console.WriteLine("There is no this customer related service desks.");
+                }
                 foreach (ServiceDesk serviceDesk in serviceDesks)
                 {
                     Console.WriteLine(serviceDesk);
@@ -356,18 +418,32 @@ namespace Lab_2
             try
             {
                 long performerId = long.Parse(Console.ReadLine());
-                if (_repository.PerformerRepository.GetById(performerId) is null)
+                Performer performer = _repository.PerformerRepository.GetById(performerId);
+                if (performer is null)
                 {
                     throw new Exception("Performer not found.");
                 }
 
+                Console.WriteLine("Model:");
+                Console.WriteLine(performer);
+
+                Console.WriteLine("Relatives:");
+
                 List<Order> orders = _repository.OrderRepository.FindAllByPerformerId(performerId);
+                if (orders.Count == 0)
+                {
+                    Console.WriteLine("There is no this performer related orders.");
+                }
                 foreach (Order order in orders)
                 {
                     Console.WriteLine(order);
                 }
 
                 List<ServiceDesk> serviceDesks = _repository.ServiceDeskRepository.FindAllByPerformerId(performerId);
+                if (serviceDesks.Count == 0)
+                {
+                    Console.WriteLine("There is no this performer related service desks.");
+                }
                 foreach (ServiceDesk serviceDesk in serviceDesks)
                 {
                     Console.WriteLine(serviceDesk);
@@ -385,12 +461,22 @@ namespace Lab_2
             try
             {
                 long orderId = long.Parse(Console.ReadLine());
-                if (_repository.OrderRepository.GetById(orderId) is null)
+                Order order = _repository.OrderRepository.GetById(orderId);
+                if (order is null)
                 {
                     throw new Exception("User not found.");
                 }
 
+                Console.WriteLine("Model:");
+                Console.WriteLine(order);
+
+                Console.WriteLine("Relatives:");
+
                 List<ServiceDesk> serviceDesks = _repository.ServiceDeskRepository.FindAllByOrderId(orderId);
+                if (serviceDesks.Count == 0)
+                {
+                    Console.WriteLine("There is no this order related service desks.");
+                }
                 foreach (ServiceDesk serviceDesk in serviceDesks)
                 {
                     Console.WriteLine(serviceDesk);

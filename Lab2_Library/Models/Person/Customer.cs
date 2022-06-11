@@ -73,7 +73,7 @@ namespace LibraryFor2ndLab.Models.Person
 
         public override string ToString()
         {
-            return $"Id: {Id}; Service: {Service}; Adress: {Adress}; ";
+            return $"Id: {Id}; Service: {Service}; Adress: {Adress}; \n User: " + User.ToString();
         }
     }
 }

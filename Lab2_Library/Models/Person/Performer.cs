@@ -89,7 +89,7 @@ namespace LibraryFor2ndLab.Models.Person
 
         public override string ToString()
         {
-            return $"Id: {Id}; Full name: {Name} {Surname}; \nBirth date: {BirthDate};";
+            return $"Id: {Id}; Full name: {Name} {Surname}; \nBirth date: {BirthDate}; \n User: " + User.ToString();
         }
     }
 }

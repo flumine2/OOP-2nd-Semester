@@ -65,7 +65,7 @@ namespace LibraryFor2ndLab.Models
 
         public override string ToString()
         {
-            string str = $"Id: {Id};" + "\n" + "Service desk name: {DeskName};" + "\n" + "Orders:" + "\n";
+            string str = $"Id: {Id};" + "\n" + $"Service desk name: {DeskName};" + "\n" + "Orders:" + "\n";
             for (int i = 0; i < OrdersList.Count; i++)
             {
                 str += OrdersList[i].ToString();
