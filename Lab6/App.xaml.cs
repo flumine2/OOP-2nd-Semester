@@ -16,6 +16,8 @@ namespace Lab6
     /// </summary>
     public partial class App : Application
     {
+        MainWindowViewModel mainVM;
+
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
@@ -23,13 +25,20 @@ namespace Lab6
             var orderEditView = new OrderEditView();
             var serviceDeskView = new ServiceDeskView();
 
-            var mainVM = new MainWindowViewModel(serviceDeskView);
+            mainVM = new MainWindowViewModel(serviceDeskView);
             var serviceDeskViewModel = new ServiceDeskViewModel(mainVM);
 
             serviceDeskView.DataContext = serviceDeskViewModel;
 
             var mainWindow = new MainWindow() { DataContext = mainVM };
             mainWindow.Show();
+        }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            base.OnExit(e);
+
+            mainVM.RepositoryControler.ServiceDeskRepository.Serialise();
         }
     }
 }

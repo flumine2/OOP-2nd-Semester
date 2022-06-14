@@ -1,6 +1,7 @@
 ﻿using Lab6.Data;
 using Lab6.Data.Repositories;
 using Lab6.Infrastructure.Commands;
+using Lab6.Services.Providers;
 using Lab6.ViewModels.Base;
 using Lab6.Views;
 using System;
@@ -50,9 +51,8 @@ namespace Lab6.ViewModels
 
         public MainWindowViewModel(ServiceDeskView serviceDeskView)
         {
-             RepositoryControler = new RepositoryControler();
+             RepositoryControler = RepositoryProvider.GetRepositoryReference();
             _frame = serviceDeskView;
-
         }
 
         /*-----------------------------------------------------------------------------------------*/

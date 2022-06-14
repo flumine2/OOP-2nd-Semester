@@ -172,22 +172,49 @@ namespace Lab6.ViewModels
 
         private void OnCreateOrderCommandExecuted(object p)
         {
-            Performer performer = new Performer(
-                CreatingPerformerName,
-                CreatingPerformerSurname,
-                CreatingPerformerBirthDate);
-
-            Customer customer = new Customer(
-                SelectedService,
-                CreatingCustomerAdress);
-
+            Performer performer = null;
+            Customer customer = null;
             DateTime creationOrderDateTime = new DateTime(CreatingOrderDate.Ticks + CreatingOrderTime.TimeOfDay.Ticks);
+            int price = 0;
+
+            try
+            {
+                performer = new Performer(
+                    CreatingPerformerName,
+                    CreatingPerformerSurname,
+                    CreatingPerformerBirthDate);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("One of the performer parameters entered wrong. \n" + e.Message);
+            }
+
+            try
+            {
+                customer = new Customer(
+                    SelectedService,
+                    CreatingCustomerAdress);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("One of the customer parameters entered wrong. \n" + e.Message);
+            }
+
+            try
+            {
+                price = int.Parse(CreatingOrderPrice);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Price in not a number. \n" + e.Message);
+            }
+            
 
             Order order = new Order(
                 performer,
                 customer,
                 creationOrderDateTime,
-                int.Parse(CreatingOrderPrice));
+                price);
 
             List<ValidationResult> validations = new List<ValidationResult>();
             if (!Validator.TryValidateObject(order, new ValidationContext(order), validations, true))

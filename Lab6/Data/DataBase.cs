@@ -1,12 +1,6 @@
 ﻿using LibraryFor2ndLab.Models;
 using LibraryFor2ndLab.Models.Person;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lab6.Data
 {

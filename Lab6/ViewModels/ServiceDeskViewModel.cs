@@ -1,6 +1,5 @@
 ﻿using Lab6.Data.Repositories;
 using Lab6.Infrastructure.Commands;
-using Lab6.Services;
 using Lab6.Services.Providers;
 using Lab6.ViewModels.Base;
 using Lab6.Views;
@@ -9,8 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -19,7 +16,6 @@ namespace Lab6.ViewModels
     class ServiceDeskViewModel : ViewModel
     {
         private MainWindowViewModel _MainWindowViewModel;
-        private OrderEditView _OrderEditView;
 
         /*-----------------------------------------------------------------------------------------*/
         public RepositoryControler RepositoryControler { get; set; }
@@ -56,7 +52,10 @@ namespace Lab6.ViewModels
 
         public ICommand OpenOrderPageCommand { get; set; }
 
-        private bool CanOpenOrderPageCommandExecute(object p) => true;
+        private bool CanOpenOrderPageCommandExecute(object p)
+        {
+            return !(SelectedServiceDesk is null);
+        }
 
         private void OnOpenOrderPageCommandExecuted(object p)
         {
