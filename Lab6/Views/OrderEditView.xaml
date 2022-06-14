@@ -12,10 +12,16 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
             <RowDefinition/>
             <RowDefinition Height="150"/>
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0"
+
+        <Grid Grid.Row="0">
+            <Button Width="80" HorizontalAlignment="Left" Content="Back" Command="{Binding CloseOrderPageCommand}"/>
+        </Grid>
+
+        <DataGrid Grid.Row="1"
                   x:Name="OrderTable"
                   AutoGenerateColumns="False"
                   SelectedItem="{Binding SelectedOrder}"
@@ -34,7 +40,7 @@
 
         </DataGrid>
 
-        <Grid Grid.Row="1" Background="GhostWhite">
+        <Grid Grid.Row="2" Background="GhostWhite">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"/>

@@ -3,6 +3,7 @@ using Lab6.Infrastructure.Commands;
 using Lab6.Services;
 using Lab6.Services.Providers;
 using Lab6.ViewModels.Base;
+using Lab6.Views;
 using LibraryFor2ndLab.Models;
 using LibraryFor2ndLab.Models.Person;
 using System;
@@ -19,8 +20,8 @@ namespace Lab6.ViewModels
 {
     class OrderEditViewModel : ViewModel
     {
-        private MainWindowViewModel MainWindowViewModel;
-        private long _serviceDeskId;
+        private MainWindowViewModel _MainWindowViewModel;
+
         public IEnumerable<Service> ComboBoxSource { get; private set; } = Enum.GetValues(typeof(Service)).Cast<Service>();
 
         /*-----------------------------------------------------------------------------------------*/
@@ -180,8 +181,6 @@ namespace Lab6.ViewModels
                 SelectedService,
                 CreatingCustomerAdress);
 
-            //DateTime time = DateTime ;
-
             DateTime creationOrderDateTime = new DateTime(CreatingOrderDate.Ticks + CreatingOrderTime.TimeOfDay.Ticks);
 
             Order order = new Order(
@@ -204,7 +203,7 @@ namespace Lab6.ViewModels
 
         #endregion
 
-        #region Deleting selected Order
+        #region Deleting selected order Command
 
         public ICommand DeleteOrderCommand { get; set; }
 
@@ -222,17 +221,39 @@ namespace Lab6.ViewModels
 
         #endregion
 
+        #region Close order page Command 
+
+        public ICommand CloseOrderPageCommand { get; set; }
+
+        private bool CanCloseOrderPageCommandExecute(object p) => true;
+
+        private void OnCloseOrderPageCommandExecuted(object p)
+        {
+            ServiceDeskViewModel serviceDeskViewModel = new ServiceDeskViewModel(_MainWindowViewModel);
+            ServiceDeskView serviceDeskView = new ServiceDeskView()
+            {
+                DataContext = serviceDeskViewModel
+            };
+
+            _MainWindowViewModel.FrameContent = serviceDeskView;
+        }
+
+        #endregion
+
         #endregion
 
         /*-----------------------------------------------------------------------------------------*/
         public OrderEditViewModel(MainWindowViewModel mainWindowViewModel, long serviceDeskId)
         {
+            _MainWindowViewModel = mainWindowViewModel;
+
             RepositoryControler = RepositoryProvider.GetRepositoryReference();
-            _serviceDeskId = serviceDeskId;
-            Orders = RepositoryControler.ServiceDeskRepository.GetById(_serviceDeskId).OrdersList;
+
+            Orders = RepositoryControler.ServiceDeskRepository.GetById(serviceDeskId).OrdersList;
 
             CreateNewOrderCommand = new LambdaCommand(OnCreateOrderCommandExecuted, CanCreateOrderCommandExecute);
             DeleteOrderCommand = new LambdaCommand(OnDeleteOrderCommandExecuted, CanDeleteOrderCommandExecute);
+            CloseOrderPageCommand = new LambdaCommand(OnCloseOrderPageCommandExecuted, CanCloseOrderPageCommandExecute);
         }
     }
 }

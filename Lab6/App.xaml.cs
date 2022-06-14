@@ -24,7 +24,7 @@ namespace Lab6
             var serviceDeskView = new ServiceDeskView();
 
             var mainVM = new MainWindowViewModel(serviceDeskView);
-            var serviceDeskViewModel = new ServiceDeskViewModel(mainVM, orderEditView);
+            var serviceDeskViewModel = new ServiceDeskViewModel(mainVM);
 
             serviceDeskView.DataContext = serviceDeskViewModel;
 

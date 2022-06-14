@@ -61,9 +61,12 @@ namespace Lab6.ViewModels
         private void OnOpenOrderPageCommandExecuted(object p)
         {
             OrderEditViewModel orderEditViewModel = new OrderEditViewModel(_MainWindowViewModel, (long)p);
-            _OrderEditView.DataContext = orderEditViewModel;
+            OrderEditView orderEditView = new OrderEditView()
+            {
+                DataContext = orderEditViewModel
+            };
 
-            _MainWindowViewModel.FrameContent = _OrderEditView;
+            _MainWindowViewModel.FrameContent = orderEditView;
         }
 
         #endregion
@@ -120,10 +123,9 @@ namespace Lab6.ViewModels
         #endregion
 
         /*-----------------------------------------------------------------------------------------*/
-        public ServiceDeskViewModel(MainWindowViewModel mainWindowViewModel, OrderEditView orderEditView)
+        public ServiceDeskViewModel(MainWindowViewModel mainWindowViewModel)
         {
             _MainWindowViewModel = mainWindowViewModel;
-            _OrderEditView = orderEditView;
 
             RepositoryControler = RepositoryProvider.GetRepositoryReference();
 
