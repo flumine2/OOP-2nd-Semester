@@ -9,16 +9,14 @@ namespace LibraryFor2ndLab.Converters
         {
             return new Customer(customerDTO.Id,
                 customerDTO.Service,
-                customerDTO.Adress,
-                UserConverter.ConvertToModel(customerDTO.User));
+                customerDTO.Adress);
         }
 
         public static CustomerDTO ConvertToDTO(Customer customer)
         {
             return new CustomerDTO(customer.Id,
                 customer.Service,
-                customer.Adress,
-                UserConverter.ConvertToDTO(customer.User));
+                customer.Adress);
         }
     }
 }

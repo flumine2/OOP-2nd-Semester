@@ -10,8 +10,7 @@ namespace LibraryFor2ndLab.Converters
             return new Performer(performerDTO.Id,
                 performerDTO.Name,
                 performerDTO.Surname,
-                performerDTO.BirthDate,
-                UserConverter.ConvertToModel(performerDTO.User));
+                performerDTO.BirthDate);
         }
 
         public static PerformerDTO ConvertToDTO(Performer performer)
@@ -19,8 +18,7 @@ namespace LibraryFor2ndLab.Converters
             return new PerformerDTO(performer.Id,
                 performer.Name,
                 performer.Surname,
-                performer.BirthDate,
-                UserConverter.ConvertToDTO(performer.User));
+                performer.BirthDate);
         }
     }
 }

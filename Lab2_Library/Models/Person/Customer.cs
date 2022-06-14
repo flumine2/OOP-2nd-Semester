@@ -6,39 +6,26 @@ namespace LibraryFor2ndLab.Models.Person
 {
     public class Customer : Entity, ICloneable, IComparable<Customer>
     {
-        public Customer(Service service, string adress, User user) : base()
+        public Customer(Service service, string adress) : base()
         {
             Service = service;
             Adress = adress;
-            User = user;
-            if (User.Role == Role.None)
-            {
-                User.Role = Role.Customer;
-            }
-            else
-            {
-                throw new ArgumentException("You can`t use this alredy taken");
-            }
         }
 
-        public Customer(long id, Service service, string adress, User user) : base(id)
+        public Customer(long id, Service service, string adress) : base(id)
         {
             Service = service;
             Adress = adress;
-            User = user;
         }
 
         [Required]
-        public Service Service { get; private set; }
+        public Service Service { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
-        public string Adress { get; private set; }
+        public string Adress { get; set; }
 
-        [Required]
-        public User User { get; private set; }
-
-        public object Clone() => new Customer(Id, Service, Adress, User);
+        public object Clone() => new Customer(Id, Service, Adress);
 
         public int CompareTo(Customer other)
         {
@@ -73,7 +60,7 @@ namespace LibraryFor2ndLab.Models.Person
 
         public override string ToString()
         {
-            return $"Id: {Id}; Service: {Service}; Adress: {Adress}; \n User: " + User.ToString();
+            return $"Id: {Id}; Service: {Service}; Adress: {Adress};";
         }
     }
 }

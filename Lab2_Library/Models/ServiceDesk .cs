@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
@@ -10,27 +11,27 @@ namespace LibraryFor2ndLab.Models
         public ServiceDesk(string deskName) : base()
         {
             DeskName = deskName;
-            OrdersList = new List<Order>();
+            OrdersList = new ObservableCollection<Order>();
         }
 
-        public ServiceDesk(long id, string deskName, List<Order> ordersList) : base(id)
+        public ServiceDesk(long id, string deskName, ObservableCollection<Order> ordersList) : base(id)
         {
             DeskName = deskName;
             OrdersList = ordersList;
         }
 
         [Required]
-        public string DeskName { get; private set; }
+        public string DeskName { get; set; }
 
         [Required]
-        public List<Order> OrdersList { get; private set; }
+        public ObservableCollection<Order> OrdersList { get; private set; }
 
         public void AddNewOrder(Order order)
         {
             OrdersList.Add(order);
         }
 
-        public object Clone() => new ServiceDesk(Id ,DeskName, OrdersList.Select(x => x.Clone() as Order).ToList());
+        public object Clone() => new ServiceDesk(Id ,DeskName, new ObservableCollection<Order>(OrdersList.Select(x => x.Clone() as Order)));
 
         public int CompareTo(object obj)
         {

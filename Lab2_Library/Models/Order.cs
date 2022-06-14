@@ -30,11 +30,11 @@ namespace LibraryFor2ndLab.Models
 
         [Required]
         [DataType(DataType.DateTime)]
-        public DateTime OrderCreationTime { get; private set; }
+        public DateTime OrderCreationTime { get; set; }
 
         [Required]
         [Range(1, 100000)]
-        public int Price { get; private set; }
+        public int Price { get; set; }
 
         public object Clone() => new Order(
             Id, 

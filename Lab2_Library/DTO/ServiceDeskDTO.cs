@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace LibraryFor2ndLab.DTO
 {
@@ -6,11 +7,11 @@ namespace LibraryFor2ndLab.DTO
     {
         public long Id;
         public string DeskName;
-        public List<OrderDTO> OrdersList;
+        public ObservableCollection<OrderDTO> OrdersList;
 
         public ServiceDeskDTO() { }
 
-        public ServiceDeskDTO(long id, string deskName, List<OrderDTO> ordersList)
+        public ServiceDeskDTO(long id, string deskName, ObservableCollection<OrderDTO> ordersList)
         {
             Id = id;
             DeskName = deskName;

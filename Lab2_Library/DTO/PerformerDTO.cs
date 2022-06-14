@@ -8,15 +8,13 @@ namespace LibraryFor2ndLab.DTO
         public string Name;
         public string Surname;
         public DateTime BirthDate;
-        public UserDTO User;
 
-        public PerformerDTO(long id, string name, string surname, DateTime birthDate, UserDTO user)
+        public PerformerDTO(long id, string name, string surname, DateTime birthDate)
         {
             Id = id;
             Name = name;
             Surname = surname;
             BirthDate = birthDate;
-            User = user;
         }
     }
 }

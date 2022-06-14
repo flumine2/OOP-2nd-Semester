@@ -6,48 +6,35 @@ namespace LibraryFor2ndLab.Models.Person
 {
     public class Performer : Entity, ICloneable, IComparable<Performer>
     {
-        public Performer(string name, string surname, DateTime birthDate, User user) : base()
+        public Performer(string name, string surname, DateTime birthDate) : base()
         {
             Name = name;
             Surname = surname;
             BirthDate = birthDate;
-            User = user;
-            if (User.Role == Role.None)
-            {
-                User.Role = Role.Performer;
-            }
-            else
-            {
-                throw new ArgumentException("You can`t use this User like a Performer - it is Customer already");
-            }
         }
 
-        public Performer(long id, string name, string surname, DateTime birthDate, User user) : base(id)
+        public Performer(long id, string name, string surname, DateTime birthDate) : base(id)
         {
             Name = name;
             Surname = surname;
             BirthDate = birthDate;
-            User = user;
         }
 
         [Required]
         [StringLength(30)]
         [DataType(DataType.Text)]
-        public string Name { get; private set; }
+        public string Name { get; set; }
 
         [Required]
         [StringLength(30)]
         [DataType(DataType.Text)]
-        public string Surname { get; private set; }
+        public string Surname { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
-        public DateTime BirthDate { get; private set; }
+        public DateTime BirthDate { get; set; }
 
-        [Required]
-        public User User { get; private set; }
-
-        public object Clone() => new Performer(Id, Name, Surname, BirthDate, User);
+        public object Clone() => new Performer(Id, Name, Surname, BirthDate);
 
         public int CompareTo(Performer other)
         {
@@ -89,7 +76,7 @@ namespace LibraryFor2ndLab.Models.Person
 
         public override string ToString()
         {
-            return $"Id: {Id}; Full name: {Name} {Surname}; \nBirth date: {BirthDate}; \n User: " + User.ToString();
+            return $"Id: {Id}; Full name: {Name} {Surname}; \nBirth date: {BirthDate};";
         }
     }
 }

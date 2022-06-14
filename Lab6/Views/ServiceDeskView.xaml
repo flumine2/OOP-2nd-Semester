@@ -1,0 +1,69 @@
+﻿<Page x:Class="Lab6.Views.ServiceDeskView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Lab6.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ServiceDeskView">
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+
+        <DataGrid Grid.Row="0"
+                  x:Name="ServiceDeskTable"
+                  AutoGenerateColumns="False"
+                  SelectedItem="{Binding SelectedServiceDesk}"
+                  ItemsSource="{Binding RepositoryControler.DataBase.ServiceDesks, UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Binding="{Binding DeskName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Desk Name"/>
+                <DataGridTextColumn Binding="{Binding OrdersList.Count, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Header="Order count" IsReadOnly="True"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Grid Grid.Row="1" Background="GhostWhite">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="240"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Width="70" Height="50" Command="{Binding CreateNewServiceDeskCommand}"
+                    Content="Add" FontSize="20" Style="{StaticResource MaterialDesignOutlinedButton}"/>
+
+            <Grid Grid.Column="1">
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="DeskNameTextBox" Text="{Binding ServiceDeskCreatingName, UpdateSourceTrigger=PropertyChanged}" Width="150" materialDesign:HintAssist.Hint="DeskName"
+                             Height="25" VerticalAlignment="Center" Margin="5, 0"/>
+                </StackPanel>
+            </Grid>
+
+            <StackPanel Grid.Column="2" Orientation="Horizontal">
+                <Button Content="Orders"
+                        FontSize="20"
+                        Width="100" Height="50"
+                        Margin="0 0 10 0"
+                        Command="{Binding OpenOrderPageCommand}"
+                        CommandParameter="{Binding SelectedServiceDesk.Id}"
+                        Style="{DynamicResource MaterialDesignOutlinedButton}"/>
+                <Button Grid.Column="2"
+                    Width="110" Height="50"
+                    Content="Remove"
+                    FontSize="20"
+                    Command="{Binding DeleteServiceDeskCommand}"
+                    CommandParameter="{Binding SelectedServiceDesk}"
+                    Style="{StaticResource MaterialDesignOutlinedButton}"/>
+            </StackPanel>
+            
+            
+        </Grid>
+    </Grid>
+</Page>
